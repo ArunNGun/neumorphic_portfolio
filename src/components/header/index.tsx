@@ -1,5 +1,6 @@
 'use client'
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useStarRain } from '../../context/StarRainContext';
 import styles from './header.module.css';
 import downloadStyles from './downloadButton.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +10,13 @@ import { faGithub, faLinkedinIn, faInstagram } from '@fortawesome/free-brands-sv
 import Card from '../Card';
 
 const Header = () => {
+  const { triggerStarRain } = useStarRain();
+  
+  const handleDownloadClick = useCallback(() => {
+    // Trigger the star rain animation
+    triggerStarRain();
+    // Continue with the default download behavior
+  }, [triggerStarRain]);
   return (
     <div className={styles.header}>
       <Card>
@@ -18,7 +26,12 @@ const Header = () => {
           <div className={styles.titleContainer}>
             <h1 className={styles.title}>ARUN KUMAR</h1>
             <div className={styles.headerActions}>
-              <a href="/Arun_Kumar.pdf" download className={downloadStyles.downloadLink}>
+              <a 
+                href="/Arun_Kumar.pdf" 
+                download 
+                className={downloadStyles.downloadLink}
+                onClick={handleDownloadClick}
+              >
                 <FontAwesomeIcon icon={faDownload} className={downloadStyles.downloadIcon} />
                 <div className={downloadStyles["star-1"]}>
                   <svg
