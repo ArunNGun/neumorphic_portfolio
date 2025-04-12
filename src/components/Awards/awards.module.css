@@ -1,0 +1,231 @@
+.mainTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  position: relative;
+}
+
+.mainTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--text-color);
+  opacity: 0.7;
+}
+
+/* Split Layout */
+.splitLayout {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Awards List Styles */
+.awardsContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.awardCard {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.awardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.awardTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.awardMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.organization {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+.year {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-top: 0.2rem;
+}
+
+.description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  opacity: 0.85;
+  margin: 0;
+}
+
+/* Certificate Showcase Styles */
+.showcaseContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.showcaseTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.certificateShowcase {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.certificateItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.activeCertificate {
+  opacity: 1;
+  z-index: 1;
+}
+
+.certificateImage {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Certificate Indicators */
+.certificateIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.certificateIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--text-color);
+  opacity: 0.3;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.certificateIndicator:hover {
+  opacity: 0.6;
+}
+
+.activeCertificateIndicator {
+  opacity: 0.8;
+  transform: scale(1.3);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .splitLayout {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .showcaseContainer {
+    order: -1; /* Move showcase to top on mobile */
+  }
+  
+  .certificateShowcase {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 1.5rem;
+  }
+  
+  .awardCard {
+    padding: 15px;
+  }
+  
+  .awardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .awardMeta {
+    align-items: flex-start;
+    margin-top: 0.5rem;
+  }
+  
+  .awardTitle {
+    font-size: 1.2rem;
+  }
+  
+  .organization {
+    font-size: 0.95rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+  }
+  
+  .showcaseTitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .certificateShowcase {
+    height: 250px;
+  }
+  
+  .certificateIndicator {
+    width: 8px;
+    height: 8px;
+  }
+}

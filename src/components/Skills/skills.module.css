@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--text-color);
+  opacity: 0.7;
+}
+
+.loe {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.description {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-right: 10px;
+}
+
+.levels {
+  display: flex;
+  gap: 15px;
+  
+}
+.levels .high::before {
+  background-color: #4caf50; /* Green */
+}
+
+.levels  .mid::before {
+  background-color: #ffc107; /* Yellow */
+}
+
+.levels  .low::before {
+  background-color: #f44336; /* Red */
+}
+.high, .mid, .low {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.levels .high::before, .levels .mid::before, .levels .low::before {
+  content: '';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+
+
+
+.skillsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  /* margin-top: 20px; */
+  /* padding-bottom: 20px; Add padding at the bottom to ensure all skills are visible */
+  width: 100%;
+}
+
+.skillTag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-color);
+  border: 1px solid;
+  transition: transform 0.2s ease;
+  margin-bottom: 2px; /* Ensure there's space between rows */
+}
+
+.skillTag:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+/* Skill level styles */
+.high {
+  background-color: rgba(76, 175, 80, 0.15); /* Green with transparency */
+  border-color: #4caf50;
+}
+
+.mid {
+  background-color: rgba(255, 193, 7, 0.15); /* Yellow with transparency */
+  border-color: #ffc107;
+}
+
+.low {
+  background-color: rgba(244, 67, 54, 0.15); /* Red with transparency */
+  border-color: #f44336;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .loe {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .levels {
+    margin-top: 5px;
+  }
+}

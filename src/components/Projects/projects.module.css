@@ -1,0 +1,254 @@
+.mainTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+  position: relative;
+}
+
+.mainTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--text-color);
+  opacity: 0.7;
+}
+
+.projectsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 20px;
+  gap: 20px;
+}
+
+.projectTitle {
+  width: 200px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.projectTitle h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.projectTitle h3::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-color);
+  transition: width 0.3s ease;
+}
+
+.titleLink:hover h3 {
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.titleLink:hover h3::after {
+  width: 100%;
+}
+
+/* Popup styles */
+.projectPopup {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 300px;
+  background-color: var(--bg-color);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.projectTitle:hover .projectPopup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.popupContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.popupContent h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 10px 0;
+  color: var(--text-color);
+}
+
+.popupContent p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--text-color);
+  opacity: 0.9;
+  margin: 0;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.projectContent {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+  .projectDescription {
+    flex: 1;
+    padding: 0 20px;
+    border-left: 1px solid var(--border1);
+    border-right: 1px solid var(--border1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+.projectDescription p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  opacity: 0.9;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 0.1em 0.6em;
+  border-radius: 0.5em;
+  background: var(--bg-color);
+  border: 1px solid var(--text-color);
+  opacity: 0.8;
+}
+
+.projectLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+  border: 1px solid var(--text-color);
+  opacity: 0.8;
+}
+
+.iconLink:hover {
+  background-color: var(--text-color);
+  color: var(--bg-color);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 1.5rem;
+  }
+  
+  .projectCard {
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+  }
+  
+  .projectTitle {
+    width: 100%;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+  
+  .projectPopup {
+    left: 0;
+    top: 100%;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .projectContent {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .projectDescription {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid var(--border1);
+    border-bottom: 1px solid var(--border1);
+    padding: 15px 0;
+  }
+  
+  .projectLinks {
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 10px;
+  }
+  
+  .imageContainer {
+    height: 120px;
+  }
+}
