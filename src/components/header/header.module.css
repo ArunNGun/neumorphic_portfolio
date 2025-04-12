@@ -44,12 +44,18 @@
   text-decoration: none;
 }
 
-.downloadLink {
+.headerActions {
+  display: flex;
+  align-items: center;
   margin-left: 15px;
+}
+
+.downloadLink {
   color: inherit;
   text-decoration: none;
   display: flex;
   align-items: center;
+  margin-right: 10px;
 }
 
 .downloadIcon {
