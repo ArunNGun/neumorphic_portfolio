@@ -40,13 +40,13 @@ const StarRain: React.FC<StarRainProps> = ({ isActive, onAnimationEnd }) => {
   useEffect(() => {
     if (isActive) {
       const newStars = [];
-      const starCount = 50; // Number of stars
+      const starCount = 50;
       
       for (let i = 0; i < starCount; i++) {
-        const size = Math.random() * 20 + 5; // Random size between 5px and 25px
-        const left = Math.random() * 100; // Random horizontal position
-        const animationDuration = Math.random() * 3 + 2; // Random duration between 2s and 5s
-        const animationDelay = Math.random() * 3; // Random delay between 0s and 3s
+        const size = Math.random() * 20 + 5;
+        const left = Math.random() * 100;
+        const animationDuration = Math.random() * 3 + 2;
+        const animationDelay = Math.random() * 3;
         
         newStars.push({
           width: `${size}px`,
@@ -59,8 +59,7 @@ const StarRain: React.FC<StarRainProps> = ({ isActive, onAnimationEnd }) => {
       
       setStars(newStars);
       
-      // End the animation after all stars have fallen
-      const maxDuration = 8; // Maximum animation duration + delay
+      const maxDuration = 8;
       const timer = setTimeout(() => {
         onAnimationEnd();
         setStars([]);

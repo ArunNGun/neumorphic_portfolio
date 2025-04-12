@@ -13,9 +13,7 @@ const Header = () => {
   const { triggerStarRain } = useStarRain();
   
   const handleDownloadClick = useCallback(() => {
-    // Trigger the star rain animation
     triggerStarRain();
-    // Continue with the default download behavior
   }, [triggerStarRain]);
   return (
     <div className={styles.header}>
