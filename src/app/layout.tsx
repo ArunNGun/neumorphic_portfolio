@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "../context/ThemeContext";
 import { StarRainProvider } from "../context/StarRainContext";
-import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -40,21 +39,50 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script id="remove-grammarly-attrs" strategy="beforeInteractive">
-          {`
-            if (typeof window !== 'undefined') {
-              document.addEventListener('DOMContentLoaded', () => {
-                const body = document.body;
-                if (body.hasAttribute('data-new-gr-c-s-check-loaded')) {
-                  body.removeAttribute('data-new-gr-c-s-check-loaded');
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              function cleanupDOM() {
+                if (document.body) {
+                  if (document.body.hasAttribute('data-new-gr-c-s-check-loaded')) {
+                    document.body.removeAttribute('data-new-gr-c-s-check-loaded');
+                  }
+                  if (document.body.hasAttribute('data-gr-ext-installed')) {
+                    document.body.removeAttribute('data-gr-ext-installed');
+                  }
+                  
+                  const knownExtIds = ['extwaiokist', 'extaicont', 'extsparkl'];
+                  knownExtIds.forEach(id => {
+                    const elements = document.querySelectorAll('[id="' + id + '"]');
+                    elements.forEach(el => el.parentNode.removeChild(el));
+                  });
                 }
-                if (body.hasAttribute('data-gr-ext-installed')) {
-                  body.removeAttribute('data-gr-ext-installed');
+              }
+              
+              cleanupDOM();
+              
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', cleanupDOM);
+              }
+              
+              setInterval(cleanupDOM, 100);
+              
+              if (typeof MutationObserver !== 'undefined') {
+                const observer = new MutationObserver(function(mutations) {
+                  cleanupDOM();
+                });
+                
+                if (document.body) {
+                  observer.observe(document.body, { childList: true, subtree: true });
+                } else {
+                  document.addEventListener('DOMContentLoaded', function() {
+                    observer.observe(document.body, { childList: true, subtree: true });
+                  });
                 }
-              });
-            }
-          `}
-        </Script>
+              }
+            })();
+          `
+        }} />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <StarRainProvider>

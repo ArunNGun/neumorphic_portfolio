@@ -7,10 +7,12 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Awards from "@/components/Awards";
 import Footer from "@/components/Footer";
+import WelcomeOverlayWrapper from "@/components/WelcomeOverlayWrapper";
 
 export default function Home() {
   return (
     <div className={styles.page}>
+      <WelcomeOverlayWrapper />
       <Header/>
       <Container>
         <About/>

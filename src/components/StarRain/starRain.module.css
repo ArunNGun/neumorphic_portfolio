@@ -20,8 +20,8 @@
 }
 
 .fil0 {
-  fill: var(--text-color);
-  filter: drop-shadow(0 0 5px var(--text-color));
+  fill: var(--accent-color);
+  filter: drop-shadow(0 0 5px var(--accent-color));
 }
 
 @keyframes fall {
