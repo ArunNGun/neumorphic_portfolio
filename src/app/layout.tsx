@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     url: "https://ar-k.vercel.app/",
     images: [
       {
-        url: "https://imgur.com/zd9c5Ib.png",
+        url: "https://imgur.com/a/ajOoM7e.png",
         width: 1200,
         height: 630,
         alt: "Arun Kumar's Portfolio",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Arun Kumar's Portfolio",
     description: "A software engineer building websites that you'd like to use.",
-    images: ["https://imgur.com/zd9c5Ib.png"],
+    images: ["https://imgur.com/a/ajOoM7e.png"],
   },
 };
 
