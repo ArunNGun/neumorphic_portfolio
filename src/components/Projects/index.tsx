@@ -4,14 +4,32 @@ import styles from './projects.module.css';
 
 const projectsData = [
     {
+        "intro": "Heavily themed and animated Portfolio inspired by Bento grid design, multi theme, implemented using NextJS",
+        "quickIntro": "Bento style portfolio",
+        "imageSrc": "https://imgur.com/yZiiZHD.png",
+        "tags": [
+            "react",
+            "NextJS",
+            "framer-motion",
+            "fontawesome",
+        ],
+        "projectLink": "https://a--k.vercel.app/",
+        "id": 1,
+        "source_code": "https://github.com/ArunNGun/bento_port",
+        "title": "Bento grid style portfolio"
+    },
+    {
         "intro": "Portfolio inspired by visual-studio code editor, multi theme, implemented using NextJS-13 ",
         "quickIntro": "vs-code style portfolio",
         "imageSrc": "https://i.imgur.com/Z2r1G8U.png",
         "tags": [
-            "react"
+            "react",
+            "NextJS",
+            "framer-motion",
+            "Notion APIs",
         ],
         "projectLink": "https://ak-code.vercel.app/",
-        "id": 1,
+        "id": 2,
         "source_code": "https://github.com/ArunNGun/bento_port",
         "title": "VS-code themed page"
     },
@@ -24,7 +42,7 @@ const projectsData = [
             "html5"
         ],
         "projectLink": "https://arunngun.github.io/3D-parallax/",
-        "id": 2,
+        "id": 3,
         "source_code": "https://github.com/ArunNGun/3D-parallax",
         "title": "Parallax-3D"
     },
@@ -37,7 +55,7 @@ const projectsData = [
             "git"
         ],
         "projectLink": "https://gh-metrics.vercel.app/",
-        "id": 3,
+        "id": 4,
         "source_code": "https://github.com/ArunNGun/git-metrics",
         "title": "gh-metrics"
     },
@@ -49,7 +67,7 @@ const projectsData = [
             "react"
         ],
         "projectLink": "Expense Tracker (expensetracker404.netlify.app)",
-        "id": 4,
+        "id": 5,
         "source_code": "https://github.com/ArunNGun/Expense-Tracker_voice_react",
         "title": "Voice-expense-tracker"
     },
@@ -61,7 +79,7 @@ const projectsData = [
             "js"
         ],
         "projectLink": "https://arunngun.github.io/Drumkit/",
-        "id": 5,
+        "id": 6,
         "source_code": "https://github.com/ArunNGun/Drumkit",
         "title": "Drumkit"
     },
@@ -73,7 +91,7 @@ const projectsData = [
             "react"
         ],
         "projectLink": "https://nodie2day.vercel.app/",
-        "id": 6,
+        "id": 7,
         "source_code": "https://github.com/ArunNGun/nodie2day",
         "title": "NoDie2Day"
     },
@@ -86,7 +104,7 @@ const projectsData = [
             "js"
         ],
         "projectLink": "https://arunngun.github.io/triply-html-css/",
-        "id": 7,
+        "id": 8,
         "source_code": "https://github.com/ArunNGun/triply-html-css",
         "title": "triply"
     }
