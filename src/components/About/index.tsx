@@ -3,26 +3,29 @@ import Card from '../Card';
 import styles from './about.module.css';
 
 const About = () => {
-  return ( 
+  return (
     <Card>
       <div className={styles.container}>
         <h2 className={styles.title}>About Me</h2>
         <p className={styles.description}>
-          I am a Fullstack Developer specialized in MERN stack with over 4 years of experience in enterprise-level application development. Currently working as a Senior Software Developer at Telus International, where I lead the design and development of microservice applications serving 30 million customers.
+          Hey there 👋 I’m <strong>Arun</strong>, a <strong>Full-stack AI Engineer</strong> with over 5 years of experience building robust, scalable applications across the enterprise ecosystem. I specialize in creating impactful user experiences using the <strong>MERN stack</strong>, and I’m currently diving deep into the world of <strong>AI, microservices, and cloud-native architectures</strong> at <strong>Telus Digital</strong>.
         </p>
         <p className={styles.description}>
-          My expertise includes React, Redux, Node.js, MongoDB, GraphQL, and microservices architecture. I have led the development of multiple reusable components, implemented micro-frontend architecture, and established coding standards that reduced code defects by 20%.
+          Right now, I’m working on integrating <strong>gRPC</strong> and <strong>GCP Pub/Sub</strong> in our production-grade micro frontends to enable high-performance, event-driven systems. My work often bridges the gap between frontend finesse and backend resilience—building <strong>micro-frontend starter kits</strong>, designing infra flows to fetch secrets securely on <strong>GCP</strong>, and rolling out reusable component libraries used by multiple teams.
         </p>
         <p className={styles.description}>
-          I am recognized for outstanding performance, having received the WOW & BRAVO Award for exceptional contributions to project delivery and team collaboration. I am passionate about knowledge sharing and have conducted educational sessions for both team members and underprivileged students.
+          In the AI space, I tinker with <strong>MCP servers</strong>, <strong>prompt engineering</strong>, and have actively contributed to building <strong>AI-powered tools</strong> that enhance productivity across our digital platform. My team snagged <strong>3rd place</strong> in a <strong>Telus-wide AI Hackathon</strong>, which was an amazing ride!
         </p>
         <p className={styles.description}>
-          In my free time, I work on side projects like game development using Unreal Engine 4, which earned 2nd place at InnoTech 2017. I am always eager to learn new technologies and contribute to innovative solutions.
+          When I’m not coding, you’ll usually find me jamming on my guitar, gaming, or nerding out over new tech. I love pushing the limits of what’s possible—whether that’s building smarter systems, exploring new dev workflows, or helping fellow engineers level up.
         </p>
-
-        </div>
+        <p className={styles.description}>
+          If you&apos;re into <strong>clean code</strong>, cool projects, and conversations about tech (or music and Anime!), we’ll probably get along just fine :)
+        </p>
+      </div>
     </Card>
-   );
+
+  );
 }
- 
+
 export default About;
