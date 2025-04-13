@@ -14,7 +14,7 @@
   left: 0;
   width: 60px;
   height: 3px;
-  background-color: var(--text-color);
+  background-color: var(--accent-color);
   opacity: 0.7;
 }
 
@@ -73,17 +73,21 @@
   font-size: 0.9rem;
   padding: 0.8rem;
   margin-top: 0.5rem;
-  border-top: 1px dotted var(--text-color);
+  border-top: 1px dotted var(--accent-color);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .techItem {
   padding: 0.1em 0.8em;
-  margin-right: 8px;;
   border-radius: 0.5em;
   background: var(--bg-color);
   border: 1px solid var(--border1);
   transition: all 0.3s;
   box-shadow: 6px 6px 12px var(--shadow-1), -6px -6px 12px var(--shadow-2);
+  display: inline-block;
+  margin-bottom: 5px;
 }
 
 @media (max-width: 768px) {
@@ -105,5 +109,32 @@
   
   .description {
     font-size: 0.9rem;
+  }
+  
+  .techStack {
+    padding: 0.6rem;
+  }
+  
+  .techItem {
+    padding: 0.1em 0.6em;
+    font-size: 0.85rem;
+    box-shadow: 3px 3px 6px var(--shadow-1), -3px -3px 6px var(--shadow-2);
+  }
+}
+
+@media (max-width: 480px) {
+  .timelineCard {
+    padding: 1rem;
+  }
+  
+  .techStack {
+    padding: 0.5rem;
+    gap: 8px;
+  }
+  
+  .techItem {
+    padding: 0.1em 0.5em;
+    font-size: 0.8rem;
+    box-shadow: 2px 2px 4px var(--shadow-1), -2px -2px 4px var(--shadow-2);
   }
 }

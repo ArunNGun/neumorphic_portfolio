@@ -1,10 +1,13 @@
 import React from 'react'
+import styles from './container.module.css'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Container = (props:any) => {
-  return ( <div style={{ width: "100%", maxWidth: "1240px", margin: "0 auto", padding: "20px" }}>
-    {props.children}
-  </div> );
+  return (
+    <div className={styles.container}>
+      {props.children}
+    </div>
+  );
 }
  
 export default Container;

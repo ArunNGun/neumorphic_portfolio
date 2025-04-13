@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "../context/ThemeContext";
 import { StarRainProvider } from "../context/StarRainContext";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -13,6 +14,13 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+}
 
 export const metadata: Metadata = {
   title: "Arun Kumar | Software Engineer",
@@ -31,6 +39,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script id="remove-grammarly-attrs" strategy="beforeInteractive">
+          {`
+            if (typeof window !== 'undefined') {
+              document.addEventListener('DOMContentLoaded', () => {
+                const body = document.body;
+                if (body.hasAttribute('data-new-gr-c-s-check-loaded')) {
+                  body.removeAttribute('data-new-gr-c-s-check-loaded');
+                }
+                if (body.hasAttribute('data-gr-ext-installed')) {
+                  body.removeAttribute('data-gr-ext-installed');
+                }
+              });
+            }
+          `}
+        </Script>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <StarRainProvider>
           <ThemeProvider>

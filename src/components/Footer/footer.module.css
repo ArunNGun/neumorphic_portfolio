@@ -119,4 +119,46 @@
   .socialLinks {
     justify-content: flex-start;
   }
+  
+  .footer {
+    padding: 25px 15px;
+    margin-top: 30px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 20px 10px;
+    margin-top: 25px;
+  }
+  
+  .content {
+    gap: 15px;
+  }
+  
+  .sectionTitle {
+    font-size: 1rem;
+  }
+  
+  .contactItem {
+    font-size: 0.9rem;
+  }
+  
+  .socialLink {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .copyright {
+    font-size: 0.8rem;
+    padding-top: 15px;
+  }
+  
+  .credits {
+    font-size: 0.75rem;
+  }
 }

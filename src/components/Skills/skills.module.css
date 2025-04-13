@@ -20,7 +20,7 @@
   left: 0;
   width: 60px;
   height: 3px;
-  background-color: var(--text-color);
+  background-color: var(--accent-color);
   opacity: 0.7;
 }
 
@@ -77,8 +77,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  /* margin-top: 20px; */
-  /* padding-bottom: 20px; Add padding at the bottom to ensure all skills are visible */
   width: 100%;
 }
 
@@ -127,5 +125,41 @@
   
   .levels {
     margin-top: 5px;
+  }
+  
+  .skillsGrid {
+    gap: 10px;
+  }
+  
+  .skillTag {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.3rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+  }
+  
+  .skillsGrid {
+    gap: 8px;
+  }
+  
+  .skillTag {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+  
+  .high, .mid, .low {
+    font-size: 0.8rem;
+  }
+  
+  .levels .high::before, .levels .mid::before, .levels .low::before {
+    width: 12px;
+    height: 12px;
   }
 }
