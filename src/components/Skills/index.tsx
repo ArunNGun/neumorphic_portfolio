@@ -23,6 +23,10 @@ const skillsData = [
   { name: 'Node', level: 'high' },
   { name: 'Express', level: 'high' },
   { name: 'MongoDB', level: 'high' },
+  { name: 'PostgreSQL', level: 'mid' },
+  { name:'gRPC', level: 'mid' },
+  { name: 'Redis', level: 'high' },
+  { name: 'MySQL', level: 'high' },
   { name: 'NoSQL', level: 'high' },
   { name: 'GraphQL', level: 'high' },
   { name: 'Backend', level: 'high' },
@@ -89,7 +93,8 @@ const Skills = () => {
   );
   
   const backendSkills = skillsData.filter(skill => 
-    ['Node', 'Express', 'MongoDB', 'NoSQL', 'GraphQL', 'Backend', 'Full-Stack', 'MERN', 'Microservices'].includes(skill.name)
+    ['Node', 'Express', 'MongoDB', 'NoSQL', 'GraphQL', 'Backend', 'Full-Stack', 'MERN', 'Microservices', 
+    'Redis', 'PostgreSQL', 'gRPC'].includes(skill.name)
   );
   
   const otherSkills = skillsData.filter(skill => 
