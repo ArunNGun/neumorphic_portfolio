@@ -10,10 +10,10 @@ const WelcomeOverlay = () => {
   const starsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isFirstVisit) {
-      setVisible(false);
-      return;
-    }
+    // if (!isFirstVisit) {
+    //   setVisible(false);
+    //   return;
+    // }
 
     if (starsRef.current) {
       const starsContainer = starsRef.current;
