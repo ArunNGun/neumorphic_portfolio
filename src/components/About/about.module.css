@@ -34,6 +34,11 @@
   text-align: justify;
 }
 
+.description strong {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
 .description:last-child {
   margin-bottom: 0;
 }

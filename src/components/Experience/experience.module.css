@@ -69,6 +69,11 @@
   opacity: 0.85;
 }
 
+.description strong {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
 .techStack {
   font-size: 0.9rem;
   padding: 0.8rem;
