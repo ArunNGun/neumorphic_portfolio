@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "../context/ThemeContext";
 import { StarRainProvider } from "../context/StarRainContext";
+import { CyberpunkProvider } from "../context/CyberpunkContext";
+import CyberpunkToggle from "../components/CyberpunkToggle";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -107,7 +109,10 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <StarRainProvider>
           <ThemeProvider>
-            {children}
+            <CyberpunkProvider>
+              {children}
+              <CyberpunkToggle />
+            </CyberpunkProvider>
           </ThemeProvider>
         </StarRainProvider>
       </body>

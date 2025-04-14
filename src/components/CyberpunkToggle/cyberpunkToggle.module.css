@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.switchBackground {
+  background-color: var(--toggle-accent-color);
+  height: 30px;
+  width: 60px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2),
+    -3px -3px 8px rgba(255, 255, 255, 0.1);
+  transition: box-shadow 1s ease-in, background-color 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.offShadow {
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2),
+    -3px -3px 8px rgba(255, 255, 255, 0.1);
+}
+
+.onShadow {
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3),
+    -3px -3px 8px rgba(255, 255, 255, 0.05);
+  background-color: #ff00ff;
+}
+
+.innerSwitch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  cursor: pointer;
+  transition: transform 0.5s ease-out, background-color 0.5s ease-out;
+  background-color: #6ef0e1;
+}
+
+.innerSwitchOn {
+  transform: translateX(30px);
+  background-color: #00ffff;
+}
+
+.cyberpunkIcon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-weight: bold;
+  font-size: 12px;
+}
