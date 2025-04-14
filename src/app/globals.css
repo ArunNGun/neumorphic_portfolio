@@ -68,6 +68,14 @@ a {
 }
 
 /* Cyberpunk mode styles */
+@font-face {
+  font-family: 'Rovelink';
+  src: url('/font/Rovelink.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root[data-cyberpunk="true"] * {
   text-shadow: 0 0 5px #00ffff;
 }
@@ -77,6 +85,11 @@ a {
 :root[data-cyberpunk="true"] h3 {
   color: #ff00ff;
   text-shadow: 0 0 10px #ff00ff;
+}
+
+:root[data-cyberpunk="true"] .title {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
 }
 
 :root[data-cyberpunk="true"] a:hover {

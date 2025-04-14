@@ -111,7 +111,7 @@ const Header = () => {
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.titleContainer}>
-            <h1 ref={titleRef} className={styles.title}>ARUN KUMAR</h1>
+            <h1 ref={titleRef} className={`${styles.title} title`}>ARUN KUMAR</h1>
             <div className={styles.headerActions}>
               <a 
                 href="/Arun_Kumar.pdf" 
