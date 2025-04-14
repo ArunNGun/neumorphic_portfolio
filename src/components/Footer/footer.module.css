@@ -24,7 +24,10 @@
   color: var(--text-color);
   position: relative;
 }
-
+:root[data-cyberpunk="true"] .sectionTitle {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .sectionTitle::after {
   content: '';
   position: absolute;

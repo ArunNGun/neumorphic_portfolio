@@ -6,7 +6,10 @@
   color: var(--text-color);
   position: relative;
 }
-
+:root[data-cyberpunk="true"] .mainTitle {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .mainTitle::after {
   content: '';
   position: absolute;
@@ -42,7 +45,10 @@
   position: relative;
   cursor: pointer;
 }
-
+:root[data-cyberpunk="true"] .projectTitle {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .titleLink {
   text-decoration: none;
   color: inherit;

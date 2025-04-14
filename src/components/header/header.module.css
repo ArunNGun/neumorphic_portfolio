@@ -40,7 +40,10 @@
   color: var(--text-color);
   text-align: center;
 }
-
+:root[data-cyberpunk="true"] .subtitle {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .link {
   color: var(--text-color);
   text-decoration: none;

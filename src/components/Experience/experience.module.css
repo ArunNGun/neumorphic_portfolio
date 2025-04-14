@@ -6,7 +6,10 @@
   color: var(--text-color);
   position: relative;
 }
-
+:root[data-cyberpunk="true"] .mainTitle {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .mainTitle::after {
   content: '';
   position: absolute;
@@ -38,7 +41,10 @@
   margin-bottom: 0.5rem;
   color: var(--text-color);
 }
-
+:root[data-cyberpunk="true"] .title {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .company {
   font-size: 1.1rem;
   font-weight: 500;

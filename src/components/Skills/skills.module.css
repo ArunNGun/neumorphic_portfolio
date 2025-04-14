@@ -12,7 +12,10 @@
   color: var(--text-color);
   position: relative;
 }
-
+:root[data-cyberpunk="true"] .title {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .title::after {
   content: '';
   position: absolute;

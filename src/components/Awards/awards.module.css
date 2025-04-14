@@ -6,7 +6,10 @@
   color: var(--text-color);
   position: relative;
 }
-
+:root[data-cyberpunk="true"] .mainTitle {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .mainTitle::after {
   content: '';
   position: absolute;
@@ -54,7 +57,10 @@
   color: var(--text-color);
   margin: 0;
 }
-
+:root[data-cyberpunk="true"] .awardTitle {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .awardMeta {
   display: flex;
   flex-direction: column;

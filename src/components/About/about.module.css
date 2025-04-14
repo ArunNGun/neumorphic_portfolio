@@ -24,6 +24,10 @@
   background-color: var(--accent-color);
   opacity: 0.7;
 }
+:root[data-cyberpunk="true"] .title {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 
 .description {
   font-size: 1rem;
