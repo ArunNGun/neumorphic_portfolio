@@ -1,36 +1,53 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 0px;
+  padding-left: 10px;
   z-index: 1000;
+  width: 125px;
+  height: 45px;
+  border: 1px solid var(--toggle-accent-color);
+  border-radius: 0px 0px 0px 20px;
+  background: #ad4cfb40;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(6.5px);
+  -webkit-backdrop-filter: blur(6.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+
 .switchBackground {
-  background-color: var(--toggle-accent-color);
+  background: rgba(255, 255, 255, 0.2);
   height: 30px;
   width: 60px;
   border-radius: 15px;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2),
-    -3px -3px 8px rgba(255, 255, 255, 0.1);
-  transition: box-shadow 1s ease-in, background-color 0.5s ease-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.5s ease;
   position: relative;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .offShadow {
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2),
-    -3px -3px 8px rgba(255, 255, 255, 0.1);
+  background: rgba(50, 50, 50, 0.3);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2),
+              0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .onShadow {
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3),
-    -3px -3px 8px rgba(255, 255, 255, 0.05);
-  background-color: #ff00ff;
+  background: rgba(255, 0, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.5),
+              0 0 30px rgba(0, 255, 255, 0.3);
+  border: 1px solid rgba(255, 0, 255, 0.5);
 }
+
 
 .innerSwitch {
   width: 24px;
@@ -43,13 +60,19 @@
   top: 3px;
   left: 3px;
   cursor: pointer;
-  transition: transform 0.5s ease-out, background-color 0.5s ease-out;
-  background-color: #6ef0e1;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  background: rgba(110, 240, 225, 0.7);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .innerSwitchOn {
   transform: translateX(30px);
-  background-color: #00ffff;
+  background: rgba(0, 255, 255, 0.7);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.8),
+              0 0 20px rgba(255, 0, 255, 0.4);
 }
 
 .cyberpunkIcon {
@@ -58,7 +81,113 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #000;
+  color: rgba(0, 0, 0, 0.8);
   font-weight: bold;
   font-size: 12px;
+  font-family: 'Rovelink', sans-serif;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+}
+.label {
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  /* font-size: 12px; */
+  font-family: 'Rovelink', sans-serif;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Glow effect for the CP text */
+@keyframes textGlow {
+  0%, 100% {
+    color: rgba(0, 0, 0, 0.8);
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    color: #000;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+  }
+}
+
+:global(:root[data-cyberpunk="false"]) .cyberpunkIcon {
+  animation: textGlow 1.5s infinite ease-in-out;
+}
+
+:global(:root[data-cyberpunk="true"]) .cyberpunkIcon {
+  color: #fcee0a;
+  text-shadow: 
+    0 0 5px rgba(0, 255, 255, 0.7),
+    0 0 10px rgba(255, 0, 255, 0.5);
+}
+:global(:root[data-cyberpunk="true"]) .label {
+  color: #fcee0a;
+  text-shadow: 
+    0 0 5px rgba(0, 255, 255, 0.7),
+    0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+
+.modeLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(0, 255, 255, 0.7), -0.05em -0.025em 0 rgba(255, 0, 255, 0.7);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 rgba(0, 255, 255, 0.7), -0.05em -0.025em 0 rgba(255, 0, 255, 0.7);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(0, 255, 255, 0.7), 0.025em 0.025em 0 rgba(255, 0, 255, 0.7);
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 rgba(0, 255, 255, 0.7), 0.025em 0.025em 0 rgba(255, 0, 255, 0.7);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(0, 255, 255, 0.7), 0.05em 0 0 rgba(255, 0, 255, 0.7);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgba(0, 255, 255, 0.7), 0.05em 0 0 rgba(255, 0, 255, 0.7);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(0, 255, 255, 0.7), -0.025em -0.025em 0 rgba(255, 0, 255, 0.7);
+  }
+}
+
+:global(:root[data-cyberpunk="true"]) .modeLabel {
+  color: rgba(255, 255, 255, 0.9);
+  animation: glitch 1s infinite;
+}
+
+
+.techDetail1, .techDetail2 {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.techDetail1 {
+  top: -2px;
+  right: 15px;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.techDetail2 {
+  bottom: -2px;
+  left: 15px;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }

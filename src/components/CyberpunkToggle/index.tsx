@@ -20,13 +20,12 @@ const CyberpunkToggle: React.FC = () => {
         switchBgRef.current.classList.add(styles.offShadow);
       }
     }
-    
-    // Use CSS transitions instead of anime.js
     toggleCyberpunkMode();
   };
 
   return (
     <div className={styles.container}>
+      <span className={styles.label}>CP</span>
       <div 
         ref={switchBgRef}
         className={`${styles.switchBackground} ${cyberpunkMode ? styles.onShadow : styles.offShadow}`}
@@ -37,7 +36,7 @@ const CyberpunkToggle: React.FC = () => {
           className={`${styles.innerSwitch} ${cyberpunkMode ? styles.innerSwitchOn : ''}`}
           onClick={handleToggle}
         >
-          <div className={styles.cyberpunkIcon}>CP</div>
+          <div className={styles.cyberpunkIcon}>$</div>
         </div>
       </div>
     </div>
