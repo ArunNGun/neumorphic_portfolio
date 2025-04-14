@@ -81,14 +81,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--text-color);
   font-weight: bold;
   font-size: 12px;
   font-family: 'Rovelink', sans-serif;
   text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
 }
 .label {
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--text-color);
   font-weight: bold;
   /* font-size: 12px; */
   font-family: 'Rovelink', sans-serif;
