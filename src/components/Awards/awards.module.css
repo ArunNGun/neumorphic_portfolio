@@ -103,7 +103,10 @@
   color: var(--text-color);
   text-align: center;
 }
-
+:root[data-cyberpunk="true"] .showcaseTitle {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+}
 .certificateShowcase {
   position: relative;
   width: 100%;
