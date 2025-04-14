@@ -161,3 +161,24 @@
     font-size: 12px;
   }
 }
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.3;
+  }
+}
+
+.flickerLetter {
+  display: inline-block;
+}
+
+:global(:root[data-cyberpunk="true"]) .flickerLetter {
+  animation: flicker 3s infinite alternate;
+  text-shadow: 1px 2px 2px #00ffe8;
+}
+:global(:root[data-cyberpunk="true"]) .title {
+  text-shadow: 1px 2px 2px #00ffe8;
+}
