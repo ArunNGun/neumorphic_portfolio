@@ -103,7 +103,7 @@ const CyberpunkLoadingScreen: React.FC<CyberpunkLoadingScreenProps> = ({ onLoadi
 
       <div className={styles.techDetails}>
         <div className={styles.techDetail}>SYS.ID: 7734-XZ</div>
-        <div className={styles.techDetail}>MEM: 16.4 TB</div>
+        <div className={styles.techDetail}>MEM: {`${(navigator as Navigator & {deviceMemory?: number}).deviceMemory || '16'} GB`}</div>
         <div className={styles.techDetail}>PING: 13ms</div>
       </div>
     </div>

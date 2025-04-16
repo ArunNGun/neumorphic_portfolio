@@ -1,6 +1,9 @@
+'use client'
 import React from 'react'
 import Card from '../Card';
 import styles from './projects.module.css';
+import { useCyberpunk } from '../../context/CyberpunkContext';
+import CyberpunkExpandingCards from '../CyberpunkExpandingCards';
 
 const projectsData = [
     {
@@ -111,12 +114,17 @@ const projectsData = [
 ];
 
 const Projects = () => {
+  const { cyberpunkMode } = useCyberpunk();
+
   return (
     <Card>
-      <div style={{ padding: '20px', marginTop: '36px' }}>
-        <h2 className={styles.mainTitle}>Personal Projects (hover on the titles...)</h2>
-        <div className={styles.projectsContainer}>
-          {projectsData.map((project) => (
+      {cyberpunkMode ? (
+        <CyberpunkExpandingCards projects={projectsData} />
+      ) : (
+        <div style={{ padding: '20px', marginTop: '36px' }}>
+          <h2 className={styles.mainTitle}>Personal Projects (hover on the titles...)</h2>
+          <div className={styles.projectsContainer}>
+            {projectsData.map((project) => (
             <Card invert key={project.id}>
               <div className={styles.projectCard}>
                 <div className={styles.projectTitle}>
@@ -183,9 +191,10 @@ const Projects = () => {
                 </div>
               </div>
             </Card>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </Card>
   );
 }

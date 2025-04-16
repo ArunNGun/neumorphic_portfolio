@@ -343,7 +343,7 @@
 .techDetails {
   position: absolute;
   bottom: 10px;
-  right: 10px;
+  right: 150px;
   display: flex;
   gap: 20px;
   font-family: 'Courier New', monospace;
