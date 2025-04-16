@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, memo } from 'react';
 import styles from './cyberpunkTransitionVideo.module.css';
 
 interface CyberpunkTransitionVideoProps {
@@ -7,42 +7,54 @@ interface CyberpunkTransitionVideoProps {
   onVideoEnd: () => void;
 }
 
-const CyberpunkTransitionVideo: React.FC<CyberpunkTransitionVideoProps> = ({ 
+const CyberpunkTransitionVideo: React.FC<CyberpunkTransitionVideoProps> = memo(({ 
   isVisible, 
   onVideoEnd 
 }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hasEndedRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (isVisible) {
       setShowVideo(true);
       setFadeOut(false);
+      hasEndedRef.current = false;
     } else {
       setFadeOut(true);
       const timer = setTimeout(() => {
         setShowVideo(false);
-      }, 500);
+      }, 500); // Match the CSS transition duration
       return () => clearTimeout(timer);
     }
   }, [isVisible]);
 
+  const handleVideoEnded = React.useCallback(() => {
+    if (!hasEndedRef.current && isVisible) {
+      console.log("Video ended event fired");
+      hasEndedRef.current = true;
+      setFadeOut(true);
+      setTimeout(() => {
+        onVideoEnd();
+      }, 500);
+    }
+  }, [onVideoEnd, isVisible]);
+
   useEffect(() => {
+    if (!isVisible) return;
+    
     const fallbackTimer = setTimeout(() => {
-      console.log("Fallback timer triggered after 3 seconds");
-      if (isVisible) {
-        setFadeOut(true);
-        setTimeout(() => {
-          onVideoEnd();
-        }, 500);
+      console.log("Fallback timer triggered");
+      if (!hasEndedRef.current && isVisible) {
+        handleVideoEnded();
       }
     }, 4000);
     
     return () => {
       clearTimeout(fallbackTimer);
     };
-  }, [onVideoEnd, isVisible]);
+  }, [isVisible, handleVideoEnded]);
 
   if (!showVideo) return null;
 
@@ -55,16 +67,17 @@ const CyberpunkTransitionVideo: React.FC<CyberpunkTransitionVideoProps> = ({
         autoPlay
         muted
         playsInline
-        onEnded={() => {
-          console.log("onEnded event fired");
-          setFadeOut(true);
-          setTimeout(() => {
-            onVideoEnd();
-          }, 500);
+        preload="auto"
+        onEnded={handleVideoEnded}
+        style={{ 
+          transform: 'translateZ(0)',
+          willChange: 'opacity'
         }}
       />
     </div>
   );
-};
+});
+
+CyberpunkTransitionVideo.displayName = 'CyberpunkTransitionVideo';
 
 export default CyberpunkTransitionVideo;

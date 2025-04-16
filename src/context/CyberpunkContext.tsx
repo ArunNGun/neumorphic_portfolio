@@ -35,7 +35,6 @@ export const CyberpunkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       audioRef.current.addEventListener('ended', handleEnded);
     }
 
-
     return () => {
       if (audioRef.current) {
         audioRef.current.removeEventListener('ended', handleEnded);
