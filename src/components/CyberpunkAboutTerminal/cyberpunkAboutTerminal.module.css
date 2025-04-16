@@ -1,0 +1,225 @@
+.terminalContainer {
+  display: none;
+  width: 100%;
+  height: 100%;
+  font-family: 'Courier New', monospace;
+  color: var(--cyber-blue);
+  position: relative;
+  overflow: hidden;
+}
+
+:global(:root[data-cyberpunk="true"]) .terminalContainer {
+  display: block;
+  background-color: rgba(0, 10, 20, 0.85);
+  border: 1px solid var(--cyber-blue);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.terminalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--cyber-blue);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.terminalTitle {
+  font-size: 1.2rem;
+  color: var(--cyber-pink);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Rovelink', sans-serif;
+  margin: 0;
+}
+
+.terminalControls {
+  display: flex;
+  gap: 8px;
+}
+
+.terminalControl {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--cyber-blue);
+}
+
+.terminalContent {
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.commandPrompt {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.promptSymbol {
+  color: var(--cyber-pink);
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.command {
+  color: var(--cyber-blue);
+}
+
+.output {
+  margin-bottom: 20px;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.highlight {
+  color: var(--cyber-pink);
+  font-weight: bold;
+}
+
+.blinkingCursor {
+  display: inline-block;
+  width: 10px;
+  height: 18px;
+  background-color: var(--cyber-blue);
+  margin-left: 5px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 255, 255, 0.04) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.navigationMenu {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.navButton {
+  background-color: transparent;
+  border: 1px solid var(--cyber-blue);
+  color: var(--cyber-blue);
+  padding: 5px 10px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 8px) 0, 
+    100% 8px, 
+    100% 100%, 
+    8px 100%, 
+    0 calc(100% - 8px)
+  );
+}
+
+.navButton:hover, .navButton.active {
+  background-color: rgba(0, 255, 255, 0.1);
+  color: var(--cyber-pink);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.navButton::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.3s ease;
+}
+
+.navButton:hover::before {
+  top: 100%;
+}
+
+.typingEffect {
+  overflow: hidden;
+  border-right: 2px solid var(--cyber-blue);
+  white-space: nowrap;
+  margin: 0;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--cyber-blue) }
+}
+
+.glitchText {
+  position: relative;
+  display: inline-block;
+}
+
+.glitchText::before, .glitchText::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitchText::before {
+  left: 2px;
+  text-shadow: -1px 0 var(--cyber-pink);
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitchText::after {
+  left: -2px;
+  text-shadow: 1px 0 var(--cyber-blue);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0%, 100% { clip-path: inset(50% 0 30% 0); }
+  20% { clip-path: inset(10% 0 60% 0); }
+  40% { clip-path: inset(40% 0 20% 0); }
+  60% { clip-path: inset(80% 0 5% 0); }
+  80% { clip-path: inset(30% 0 70% 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0%, 100% { clip-path: inset(30% 0 50% 0); }
+  20% { clip-path: inset(60% 0 10% 0); }
+  40% { clip-path: inset(20% 0 40% 0); }
+  60% { clip-path: inset(5% 0 80% 0); }
+  80% { clip-path: inset(70% 0 30% 0); }
+}

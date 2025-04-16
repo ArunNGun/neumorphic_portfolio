@@ -1,0 +1,47 @@
+.controlsContainer {
+  display: none;
+}
+
+:global(:root[data-cyberpunk="true"]) .controlsContainer {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  gap: 8px;
+  z-index: 10;
+}
+
+.controlButton {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--cyber-blue);
+  transition: all 0.2s ease;
+}
+
+.redButton {
+  background-color: rgba(255, 50, 50, 0.5);
+}
+
+.redButton:hover {
+  background-color: rgba(255, 50, 50, 0.8);
+  box-shadow: 0 0 5px rgba(255, 50, 50, 0.8);
+}
+
+.yellowButton {
+  background-color: rgba(255, 210, 50, 0.5);
+}
+
+.yellowButton:hover {
+  background-color: rgba(255, 210, 50, 0.8);
+  box-shadow: 0 0 5px rgba(255, 210, 50, 0.8);
+}
+
+.greenButton {
+  background-color: rgba(50, 255, 50, 0.5);
+}
+
+.greenButton:hover {
+  background-color: rgba(50, 255, 50, 0.8);
+  box-shadow: 0 0 5px rgba(50, 255, 50, 0.8);
+}
