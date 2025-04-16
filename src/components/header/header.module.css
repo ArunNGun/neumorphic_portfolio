@@ -200,6 +200,7 @@
 /* Glitch effect */
 .glitch {
   position: relative;
+  z-index: 5;
 }
 
 .glitch span {
@@ -208,6 +209,7 @@
 
 .layers {
   position: relative;
+  z-index: 5;
 }
 
 .layers::before,
