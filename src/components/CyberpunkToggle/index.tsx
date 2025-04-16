@@ -1,10 +1,12 @@
 'use client'
 import React, { useRef, useEffect, useState } from 'react';
 import { useCyberpunk } from '../../context/CyberpunkContext';
+import { useResources } from '../../context/ResourcesContext';
 import styles from './cyberpunkToggle.module.css';
 
 const CyberpunkToggle: React.FC = () => {
   const { cyberpunkMode, toggleCyberpunkMode } = useCyberpunk();
+  const { resourcesLoaded } = useResources();
   const switchBgRef = useRef<HTMLDivElement>(null);
   const innerSwitchRef = useRef<HTMLDivElement>(null);
   const [glitching, setGlitching] = useState(false);
@@ -37,6 +39,10 @@ const CyberpunkToggle: React.FC = () => {
     }
     toggleCyberpunkMode();
   };
+
+  if (!resourcesLoaded) {
+    return null; // Don't render the toggle until resources are loaded
+  }
 
   return (
     <div className={`${styles.container} ${cyberpunkMode ? styles.cyberpunkContainer : ''} ${glitching ? styles.glitchEffect : ''}`}>

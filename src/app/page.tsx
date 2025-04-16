@@ -8,10 +8,12 @@ import Projects from "@/components/Projects";
 import Awards from "@/components/Awards";
 import Footer from "@/components/Footer";
 import WelcomeOverlayWrapper from "@/components/WelcomeOverlayWrapper";
+import CyberpunkBackground from "@/components/CyberpunkBackground";
 
 export default function Home() {
   return (
     <div className={styles.page}>
+      <CyberpunkBackground />
       <WelcomeOverlayWrapper />
       <Header/>
       <Container>

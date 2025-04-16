@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "../context/ThemeContext";
 import { StarRainProvider } from "../context/StarRainContext";
 import { CyberpunkProvider } from "../context/CyberpunkContext";
+import { ResourcesProvider } from "../context/ResourcesContext";
 import CyberpunkWrapper from "../components/CyberpunkWrapper";
 import "./globals.css";
 import "./metadata";
@@ -72,11 +73,13 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <StarRainProvider>
           <ThemeProvider>
-            <CyberpunkProvider>
-              <CyberpunkWrapper>
-                {children}
-              </CyberpunkWrapper>
-            </CyberpunkProvider>
+            <ResourcesProvider>
+              <CyberpunkProvider>
+                <CyberpunkWrapper>
+                  {children}
+                </CyberpunkWrapper>
+              </CyberpunkProvider>
+            </ResourcesProvider>
           </ThemeProvider>
         </StarRainProvider>
       </body>
