@@ -9,82 +9,20 @@ import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import ThemeToggle from '../ThemeToggle';
 import { faGithub, faLinkedinIn, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import Card from '../Card';
-import { animate, utils } from 'animejs';
+import { animate } from 'animejs';
 
 const Header = () => {
   const { triggerStarRain } = useStarRain();
   const { cyberpunkMode } = useCyberpunk();
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const glitchIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
   const handleDownloadClick = useCallback(() => {
     triggerStarRain();
   }, [triggerStarRain]);
   
   useEffect(() => {
-
-    if (glitchIntervalRef.current) {
-      clearInterval(glitchIntervalRef.current);
-      glitchIntervalRef.current = null;
-    }
-    
-    if (cyberpunkMode && titleRef.current) {
-
-      utils.set(titleRef.current, {
-        translateX: 0,
-        translateY: 0,
-        scale: 1,
-        opacity: 1,
-        color: '#ff00ff'
-      });
-      
-      glitchIntervalRef.current = setInterval(() => {
-        const glitchX = Math.random() * 10 - 5;
-        const glitchY = Math.random() * 6 - 3;
-        const glitchScale = 1 + (Math.random() * 0.1 - 0.05);
-        const glitchOpacity = 0.8 + Math.random() * 0.2;
-        
-        // Apply glitch effect
-        animate(titleRef.current!, {
-          translateX: [
-            { value: glitchX, duration: 100, easing: 'steps(1)' },
-            { value: -glitchX, duration: 50, easing: 'steps(1)' },
-            { value: 0, duration: 50, easing: 'steps(1)' }
-          ],
-          translateY: [
-            { value: glitchY, duration: 100, easing: 'steps(1)' },
-            { value: -glitchY, duration: 50, easing: 'steps(1)' },
-            { value: 0, duration: 50, easing: 'steps(1)' }
-          ],
-          scale: [
-            { value: glitchScale, duration: 100, easing: 'steps(1)' },
-            { value: 1, duration: 100, easing: 'steps(1)' }
-          ],
-          opacity: [
-            { value: glitchOpacity, duration: 100, easing: 'steps(1)' },
-            { value: 1, duration: 100, easing: 'steps(1)' }
-          ],
-          color: [
-            { value: '#00ffff', duration: 50, easing: 'steps(1)' },
-            { value: '#ff00ff', duration: 50, easing: 'steps(1)' },
-            { value: '#ffffff', duration: 50, easing: 'steps(1)' },
-            { value: '#ff00ff', duration: 50, easing: 'steps(1)' }
-          ],
-          complete: function() {
-            if (!cyberpunkMode && titleRef.current) {
-              utils.set(titleRef.current, {
-                translateX: 0,
-                translateY: 0,
-                scale: 1,
-                opacity: 1
-              });
-            }
-          }
-        });
-      }, 2000); // Glitch every 2 seconds
-    } else if (titleRef.current) {
-      // Reset to normal state when cyberpunk mode is off
-      animate(titleRef.current!, {
+    if (!cyberpunkMode && titleRef.current) {
+      animate(titleRef.current, {
         translateX: 0,
         translateY: 0,
         scale: 1,
@@ -94,13 +32,6 @@ const Header = () => {
         easing: 'easeOutQuad'
       });
     }
-    
-    // Cleanup function
-    return () => {
-      if (glitchIntervalRef.current) {
-        clearInterval(glitchIntervalRef.current);
-      }
-    };
   }, [cyberpunkMode]);
   return (
     <div className={styles.header}>
@@ -109,7 +40,13 @@ const Header = () => {
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.titleContainer}>
-            <h1 ref={titleRef} className={`${styles.title} title`} data-text="ARUN KUMAR">A<span className={styles.flickerLetter}>R</span>UN KUMAR</h1>
+            {cyberpunkMode ? (
+              <h1 ref={titleRef} className={`${styles.title} ${styles.glitch}`} data-text="ARUN KUMAR">
+                <span className={styles.layers} data-text="ARUN KUMAR">ARUN KUMAR</span>
+              </h1>
+            ) : (
+              <h1 ref={titleRef} className={`${styles.title} title`} data-text="ARUN KUMAR">A<span className={styles.flickerLetter}>R</span>UN KUMAR</h1>
+            )}
             {cyberpunkMode && (
               <div className={styles.techDetails}>
                 <div className={styles.techDetail}>ID: AK-97</div>

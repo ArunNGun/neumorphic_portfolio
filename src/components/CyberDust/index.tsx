@@ -1,29 +1,42 @@
 'use client'
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import { useCyberpunk } from '../../context/CyberpunkContext';
 import styles from './cyberDust.module.css';
 
 const CyberDust: React.FC = () => {
   const { cyberpunkMode } = useCyberpunk();
   
-  if (!cyberpunkMode) return null;
+  const particles = useMemo(() => {
+    return Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      animationDuration: `${Math.random() * 15 + 10}s`,
+      animationDelay: `${Math.random() * 5}s`,
+      width: `${Math.random() * 3 + 1}px`,
+      height: `${Math.random() * 3 + 1}px`,
+      opacity: Math.random() * 0.4 + 0.1,
+      transform: 'translateZ(0)'
+    }));
+  }, []);
   
-  const particles = Array.from({ length: 50 }, (_, i) => i);
+  if (!cyberpunkMode) return null;
   
   return (
     <div className={styles.cyberDust}>
-      {particles.map((i) => (
+      {particles.map((particle) => (
         <div 
-          key={i} 
+          key={particle.id} 
           className={styles.particle}
           style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animationDuration: `${Math.random() * 20 + 10}s`,
-            animationDelay: `${Math.random() * 5}s`,
-            width: `${Math.random() * 4 + 1}px`,
-            height: `${Math.random() * 4 + 1}px`,
-            opacity: Math.random() * 0.5 + 0.2
+            top: particle.top,
+            left: particle.left,
+            animationDuration: particle.animationDuration,
+            animationDelay: particle.animationDelay,
+            width: particle.width,
+            height: particle.height,
+            opacity: particle.opacity,
+            transform: particle.transform
           }}
         />
       ))}
@@ -31,4 +44,4 @@ const CyberDust: React.FC = () => {
   );
 };
 
-export default CyberDust;
+export default memo(CyberDust);

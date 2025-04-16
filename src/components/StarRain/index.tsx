@@ -1,12 +1,12 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import styles from './starRain.module.css';
 
 interface StarProps {
   style: React.CSSProperties;
 }
 
-const Star: React.FC<StarProps> = ({ style }) => {
+const Star: React.FC<StarProps> = memo(({ style }) => {
   return (
     <div className={styles.star} style={style}>
       <svg
@@ -18,7 +18,6 @@ const Star: React.FC<StarProps> = ({ style }) => {
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
         <g id="Layer_x0020_1">
-          <metadata id="CorelCorpID_0Corel-Layer"></metadata>
           <path
             className={styles.fil0}
             d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
@@ -27,7 +26,9 @@ const Star: React.FC<StarProps> = ({ style }) => {
       </svg>
     </div>
   );
-};
+});
+
+Star.displayName = 'Star';
 
 interface StarRainProps {
   isActive: boolean;
@@ -40,13 +41,13 @@ const StarRain: React.FC<StarRainProps> = ({ isActive, onAnimationEnd }) => {
   useEffect(() => {
     if (isActive) {
       const newStars = [];
-      const starCount = 50;
+      const starCount = 30;
       
       for (let i = 0; i < starCount; i++) {
         const size = Math.random() * 20 + 5;
         const left = Math.random() * 100;
-        const animationDuration = Math.random() * 3 + 2;
-        const animationDelay = Math.random() * 3;
+        const animationDuration = Math.random() * 2.5 + 1.5;
+        const animationDelay = Math.random() * 2;
         
         newStars.push({
           width: `${size}px`,
@@ -54,12 +55,14 @@ const StarRain: React.FC<StarRainProps> = ({ isActive, onAnimationEnd }) => {
           left: `${left}%`,
           animationDuration: `${animationDuration}s`,
           animationDelay: `${animationDelay}s`,
+          willChange: 'transform',
+          transform: 'translateZ(0)'
         });
       }
       
       setStars(newStars);
       
-      const maxDuration = 8;
+      const maxDuration = 6;
       const timer = setTimeout(() => {
         onAnimationEnd();
         setStars([]);
@@ -80,4 +83,4 @@ const StarRain: React.FC<StarRainProps> = ({ isActive, onAnimationEnd }) => {
   );
 };
 
-export default StarRain;
+export default memo(StarRain);

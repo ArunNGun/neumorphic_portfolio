@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, memo } from 'react';
 import styles from './cyberpunkLoadingScreen.module.css';
 
 interface CyberpunkLoadingScreenProps {
@@ -11,6 +11,7 @@ const CyberpunkLoadingScreen: React.FC<CyberpunkLoadingScreenProps> = ({ onLoadi
   const [cursorVisible, setCursorVisible] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [showContent, setShowContent] = useState(true);
+  const cursorAnimationRef = useRef<number | undefined>(undefined);
   
   const fullText = 
     "> Initializing neural interface...\n> Loading cybernetic enhancements...\n> Calibrating visual cortex...\n> Establishing network connection...\n> Welcome to the neon grid, user.";
@@ -24,11 +25,16 @@ const CyberpunkLoadingScreen: React.FC<CyberpunkLoadingScreenProps> = ({ onLoadi
       } else {
         clearInterval(terminalInterval);
       }
-    }, 30);
+    }, 35);
 
-    const cursorInterval = setInterval(() => {
+    const animateCursor = () => {
       setCursorVisible(prev => !prev);
-    }, 500);
+      setTimeout(() => {
+        cursorAnimationRef.current = requestAnimationFrame(animateCursor);
+      }, 500);
+    };
+    
+    cursorAnimationRef.current = requestAnimationFrame(animateCursor);
 
     const progressInterval = setInterval(() => {
       setLoadingProgress(prev => {
@@ -42,21 +48,23 @@ const CyberpunkLoadingScreen: React.FC<CyberpunkLoadingScreenProps> = ({ onLoadi
           }, 1000);
           return 100;
         }
-        return prev + 1;
+        return prev + 2;
       });
-    }, 50);
+    }, 60);
 
     return () => {
       clearInterval(terminalInterval);
-      clearInterval(cursorInterval);
       clearInterval(progressInterval);
+      if (cursorAnimationRef.current) {
+        cancelAnimationFrame(cursorAnimationRef.current);
+      }
     };
   }, [fullText, onLoadingComplete]);
 
   return (
     <div className={`${styles.loadingScreen} ${!showContent ? styles.fadeOut : ''}`}>
       <div className={styles.cyberGrid}>
-        {Array.from({ length: 25 }).map((_, i) => (
+        {Array.from({ length: 16 }).map((_, i) => (
           <div key={i} className={styles.gridCell}></div>
         ))}
       </div>
@@ -110,4 +118,4 @@ const CyberpunkLoadingScreen: React.FC<CyberpunkLoadingScreenProps> = ({ onLoadi
   );
 };
 
-export default CyberpunkLoadingScreen;
+export default memo(CyberpunkLoadingScreen);
