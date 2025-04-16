@@ -5,7 +5,9 @@ import { CyberpunkProvider } from "../context/CyberpunkContext";
 import { ResourcesProvider } from "../context/ResourcesContext";
 import CyberpunkWrapper from "../components/CyberpunkWrapper";
 import "./globals.css";
-import "./metadata";
+import { metadata, viewport } from "./metadata";
+
+export { metadata, viewport };
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

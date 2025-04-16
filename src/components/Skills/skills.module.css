@@ -12,10 +12,12 @@
   color: var(--text-color);
   position: relative;
 }
+
 :root[data-cyberpunk="true"] .title {
   font-family: 'Rovelink', sans-serif;
   letter-spacing: 2px;
 }
+
 .title::after {
   content: '';
   position: absolute;
@@ -45,19 +47,20 @@
 .levels {
   display: flex;
   gap: 15px;
-  
 }
+
 .levels .high::before {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
 }
 
-.levels  .mid::before {
-  background-color: #ffc107; /* Yellow */
+.levels .mid::before {
+  background-color: #ffc107;
 }
 
-.levels  .low::before {
-  background-color: #f44336; /* Red */
+.levels .low::before {
+  background-color: #f44336;
 }
+
 .high, .mid, .low {
   display: flex;
   align-items: center;
@@ -73,8 +76,6 @@
   margin-right: 5px;
   border-radius: 3px;
 }
-
-
 
 .skillsGrid {
   display: flex;
@@ -92,7 +93,7 @@
   color: var(--text-color);
   border: 1px solid;
   transition: transform 0.2s ease;
-  margin-bottom: 2px; /* Ensure there's space between rows */
+  margin-bottom: 2px;
 }
 
 .skillTag:hover {
@@ -100,20 +101,305 @@
   transition: transform 0.2s ease;
 }
 
-/* Skill level styles */
 .high {
-  background-color: rgba(76, 175, 80, 0.15); /* Green with transparency */
+  background-color: rgba(76, 175, 80, 0.15);
   border-color: #4caf50;
 }
 
 .mid {
-  background-color: rgba(255, 193, 7, 0.15); /* Yellow with transparency */
+  background-color: rgba(255, 193, 7, 0.15);
   border-color: #ffc107;
 }
 
 .low {
-  background-color: rgba(244, 67, 54, 0.15); /* Red with transparency */
+  background-color: rgba(244, 67, 54, 0.15);
   border-color: #f44336;
+}
+
+.cyberpunkContainer {
+  width: 100%;
+  position: relative;
+  font-family: 'Courier New', monospace;
+  color: #00ffff;
+  overflow: hidden;
+}
+
+.cyberpunkHeader {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.cyberpunkTitle {
+  font-family: 'Space Armor', 'Rovelink', sans-serif;
+  font-size: 2.2rem;
+  margin: 0;
+  color: #fcee0a;
+  text-shadow: 0 0 10px #fcee0a;
+  letter-spacing: 2px;
+}
+
+.cyberpunkSubtitle {
+  font-size: 1rem;
+  color: #00ffff;
+  text-shadow: 0 0 5px #00ffff;
+  margin-top: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.glitchText {
+  position: relative;
+  display: inline-block;
+  animation: glitchAnim 5s infinite;
+}
+
+.glitchText::before,
+.glitchText::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitchText::before {
+  color: #ff00ff;
+  z-index: -1;
+  animation: glitchOffset1 5s infinite alternate-reverse;
+  text-shadow: 0 0 5px #ff00ff;
+}
+
+.glitchText::after {
+  color: #00ffff;
+  z-index: -2;
+  animation: glitchOffset2 5s infinite alternate-reverse;
+  text-shadow: 0 0 5px #00ffff;
+}
+
+@keyframes glitchAnim {
+  0%, 95%, 100% { opacity: 1; }
+  95.5%, 96.5% { opacity: 0.9; }
+  96% { opacity: 1; }
+  97%, 98% { opacity: 0.9; }
+  97.5% { opacity: 1; }
+}
+
+@keyframes glitchOffset1 {
+  0%, 95%, 100% { transform: translate(0); }
+  95.5%, 97.5% { transform: translate(-2px, 1px); }
+  96%, 97% { transform: translate(1px, -1px); }
+}
+
+@keyframes glitchOffset2 {
+  0%, 95%, 100% { transform: translate(0); }
+  95.5%, 97.5% { transform: translate(2px, -1px); }
+  96%, 97% { transform: translate(-1px, 1px); }
+}
+
+.categoryNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.categoryButton {
+  background-color: rgba(0, 10, 20, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 6px 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.categoryButton:hover, 
+.activeCategory {
+  background-color: rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  border-color: #00ffff;
+  color: #00ffff;
+}
+
+.categoryIcon {
+  font-size: 1rem;
+}
+
+.cyberpunkSkillsArea {
+  position: relative;
+  background-color: rgba(0, 10, 20, 0.7);
+  border: 1px solid #00ffff;
+  padding: 20px;
+  border-radius: 5px;
+  min-height: 400px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  clip-path: polygon(0 15px, 15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px));
+}
+
+.cyberpunkSkillsArea::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px) 0 0 / 20px 20px,
+              linear-gradient(0deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px) 0 0 / 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.scanning::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgba(0, 255, 255, 0.7);
+  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+  animation: scanAnimation 1s linear;
+  z-index: 10;
+}
+
+@keyframes scanAnimation {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 255, 0.04) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cyberpunkSkillsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.cyberpunkSkillItem {
+  background-color: rgba(0, 20, 40, 0.7);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  padding: 10px 15px;
+  position: relative;
+  transition: all 0.3s ease;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.cyberpunkSkillItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 0%, rgba(0, 255, 255, 0.05) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cyberpunkSkillItem:hover {
+  background-color: rgba(0, 40, 60, 0.7);
+  border-color: rgba(0, 255, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.skillNameValue {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  position: relative;
+  z-index: 2;
+}
+
+.skillName {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.7);
+}
+
+.skillValue {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fcee0a;
+  text-shadow: 0 0 5px rgba(252, 238, 10, 0.7);
+}
+
+.skillBarContainer {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 5px;
+  position: relative;
+  z-index: 2;
+}
+
+.skillBar {
+  height: 100%;
+  background-color: #4caf50;
+  position: relative;
+  transition: width 0.5s ease;
+}
+
+.skillBar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 0 5px white, 0 0 10px white;
+}
+
+.skillAttributes {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  z-index: 2;
+}
+
+.skillAttribute {
+  padding: 2px 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+}
+
+.cyberpunkOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 10, 20, 0.1) 80%, rgba(0, 10, 20, 0.4) 100%);
+  z-index: 3;
 }
 
 @media (max-width: 768px) {
@@ -136,6 +422,23 @@
   
   .skillTag {
     font-size: 0.8rem;
+  }
+  
+  .cyberpunkTitle {
+    font-size: 1.8rem;
+  }
+  
+  .cyberpunkSubtitle {
+    font-size: 0.9rem;
+  }
+  
+  .categoryNav {
+    gap: 5px;
+  }
+  
+  .categoryButton {
+    padding: 5px 10px;
+    font-size: 0.75rem;
   }
 }
 
