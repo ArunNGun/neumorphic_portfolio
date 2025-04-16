@@ -170,7 +170,7 @@ const Skills = () => {
             <div className={styles.cyberpunkContainer}>
               <div className={styles.cyberpunkHeader}>
                 <h2 className={styles.cyberpunkTitle}>
-                  <span className={styles.glitchText} data-text="NEURAL NETWORK">NEURAL NETWORK</span>
+                  <span className={styles.glitchText} data-text="NEURAL SKILLZ">NEURAL SKILLZ</span>
                 </h2>
                 <div className={styles.cyberpunkSubtitle}>SKILL MATRIX v2.0</div>
               </div>
