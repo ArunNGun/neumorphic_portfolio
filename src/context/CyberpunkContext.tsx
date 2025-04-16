@@ -3,13 +3,16 @@ import React, { createContext, useContext, useState, useEffect, useRef } from 'r
 
 interface CyberpunkContextType {
   cyberpunkMode: boolean;
+  isLoading: boolean;
   toggleCyberpunkMode: () => void;
+  handleLoadingComplete: () => void;
 }
 
 const CyberpunkContext = createContext<CyberpunkContextType | undefined>(undefined);
 
 export const CyberpunkProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cyberpunkMode, setCyberpunkMode] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -49,24 +52,34 @@ export const CyberpunkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     };
   }, []);
 
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
   const toggleCyberpunkMode = () => {
     const newMode = !cyberpunkMode;
-    setCyberpunkMode(newMode);
-    localStorage.setItem('cyberpunkMode', newMode.toString());
-    document.documentElement.setAttribute('data-cyberpunk', newMode.toString());
-
+    
     if (newMode) {
-      if (audioRef.current) {
-        audioRef.current.currentTime = 0;
-        setTimeout(() => {
-          if (audioRef.current) {
-            audioRef.current.play().catch(error => {
-              console.error('Audio playback failed:', error);
-            });
-          }
-        }, 50);
-      }
+      setIsLoading(true);
+      
+      setTimeout(() => {
+        setCyberpunkMode(true);
+        localStorage.setItem('cyberpunkMode', 'true');
+        document.documentElement.setAttribute('data-cyberpunk', 'true');
+        
+        if (audioRef.current) {
+          audioRef.current.currentTime = 0;
+          audioRef.current.play().catch(error => {
+            console.error('Audio playback failed:', error);
+          });
+        }
+      }, 100);
     } else {
+
+      setCyberpunkMode(false);
+      localStorage.setItem('cyberpunkMode', 'false');
+      document.documentElement.setAttribute('data-cyberpunk', 'false');
+      
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
@@ -75,7 +88,7 @@ export const CyberpunkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   };
 
   return (
-    <CyberpunkContext.Provider value={{ cyberpunkMode, toggleCyberpunkMode }}>
+    <CyberpunkContext.Provider value={{ cyberpunkMode, isLoading, toggleCyberpunkMode, handleLoadingComplete }}>
       {children}
     </CyberpunkContext.Provider>
   );

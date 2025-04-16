@@ -7,16 +7,90 @@
   bottom: 20px;
   right: 0px;
   padding-left: 10px;
-  z-index: 1000;
+  z-index: 9999;
   width: 125px;
   height: 45px;
   border: 1px solid var(--toggle-accent-color);
   border-radius: 0px 0px 0px 20px;
   background: #ad4cfb40;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 0 20px rgba(255, 0, 255, 0.5);
   backdrop-filter: blur(6.5px);
   -webkit-backdrop-filter: blur(6.5px);
   border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 0 20px rgba(255, 0, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.6), 0 0 30px rgba(255, 0, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 0 20px rgba(255, 0, 255, 0.5);
+  }
+}
+
+.cyberpunkContainer {
+  background: rgba(10, 10, 30, 0.7);
+  border: 1px solid var(--cyber-blue);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  clip-path: polygon(
+    0 0, 
+    100% 0, 
+    100% 70%, 
+    90% 100%, 
+    0 100%
+  );
+}
+
+.glitchEffect {
+  animation: glitchContainer 0.2s linear;
+}
+
+@keyframes glitchContainer {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.techCorner1, .techCorner2 {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-style: solid;
+  border-color: var(--cyber-blue);
+  pointer-events: none;
+}
+
+.techCorner1 {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+}
+
+.techCorner2 {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
 }
 
 
@@ -33,6 +107,33 @@
   position: relative;
   overflow: hidden;
   margin: 0 auto;
+}
+
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.3;
+  animation: scanlineMove 10s linear infinite;
+}
+
+@keyframes scanlineMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
 }
 
 .offShadow {
@@ -66,6 +167,7 @@
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 3;
 }
 
 .innerSwitchOn {
@@ -73,6 +175,17 @@
   background: rgba(0, 255, 255, 0.7);
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.8),
               0 0 20px rgba(255, 0, 255, 0.4);
+  clip-path: polygon(
+    0 25%, 
+    25% 0, 
+    75% 0, 
+    100% 25%, 
+    100% 75%, 
+    75% 100%, 
+    25% 100%, 
+    0 75%
+  );
+  border-radius: 0;
 }
 
 .cyberpunkIcon {
@@ -86,13 +199,82 @@
   font-size: 12px;
   font-family: 'Rovelink', sans-serif;
   text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+.cyberpunkIcon::before,
+.cyberpunkIcon::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+
+:global(:root[data-cyberpunk="true"]) .cyberpunkIcon::before {
+  color: var(--cyber-pink);
+  opacity: 0.5;
+  animation: glitchIcon1 2s infinite linear alternate-reverse;
+}
+
+:global(:root[data-cyberpunk="true"]) .cyberpunkIcon::after {
+  color: var(--cyber-blue);
+  opacity: 0.5;
+  animation: glitchIcon2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitchIcon1 {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20%, 80% {
+    transform: translate(-1px, 1px);
+  }
+  40%, 60% {
+    transform: translate(1px, -1px);
+  }
+}
+
+@keyframes glitchIcon2 {
+  0%, 100% {
+    transform: translate(0);
+  }
+  25%, 75% {
+    transform: translate(1px, -1px);
+  }
+  50% {
+    transform: translate(-1px, 1px);
+  }
 }
 .label {
   color: var(--text-color);
   font-weight: bold;
-  /* font-size: 12px; */
   font-family: 'Rovelink', sans-serif;
   text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+  position: relative;
+  margin-right: 10px;
+}
+
+:global(:root[data-cyberpunk="true"]) .label {
+  font-family: 'Space Armor', 'Rovelink', monospace;
+  position: relative;
+}
+
+:global(:root[data-cyberpunk="true"]) .label::before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  text-shadow: 2px 0 var(--cyber-pink);
+  top: 0;
+  color: var(--cyber-pink);
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: cyber-noise-anim-2 3s infinite linear alternate-reverse;
 }
 
 /* Glow effect for the CP text */
@@ -117,11 +299,36 @@
     0 0 5px rgba(0, 255, 255, 0.7),
     0 0 10px rgba(255, 0, 255, 0.5);
 }
+
 :global(:root[data-cyberpunk="true"]) .label {
   color: #fcee0a;
   text-shadow: 
     0 0 5px rgba(0, 255, 255, 0.7),
     0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+/* Tech details */
+.techDetails {
+  position: absolute;
+  bottom: 2px;
+  left: 5px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: var(--cyber-blue);
+}
+
+.techDetail {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1px 4px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 3px) 0, 
+    100% 3px, 
+    100% 100%, 
+    3px 100%, 
+    0 calc(100% - 3px)
+  );
 }
 
 

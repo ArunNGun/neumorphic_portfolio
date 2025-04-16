@@ -22,14 +22,14 @@ const Header = () => {
   }, [triggerStarRain]);
   
   useEffect(() => {
-    // Clear any existing interval
+
     if (glitchIntervalRef.current) {
       clearInterval(glitchIntervalRef.current);
       glitchIntervalRef.current = null;
     }
     
     if (cyberpunkMode && titleRef.current) {
-      // Reset any previous animations
+
       utils.set(titleRef.current, {
         translateX: 0,
         translateY: 0,
@@ -38,9 +38,7 @@ const Header = () => {
         color: '#ff00ff'
       });
       
-      // Start glitch effect
       glitchIntervalRef.current = setInterval(() => {
-        // Random glitch values
         const glitchX = Math.random() * 10 - 5;
         const glitchY = Math.random() * 6 - 3;
         const glitchScale = 1 + (Math.random() * 0.1 - 0.05);
@@ -111,7 +109,13 @@ const Header = () => {
       <div className={styles.container}>
         <div className={styles.main}>
           <div className={styles.titleContainer}>
-            <h1 ref={titleRef} className={`${styles.title} title`}>A<span className={styles.flickerLetter}>R</span>UN KUMAR</h1>
+            <h1 ref={titleRef} className={`${styles.title} title`} data-text="ARUN KUMAR">A<span className={styles.flickerLetter}>R</span>UN KUMAR</h1>
+            {cyberpunkMode && (
+              <div className={styles.techDetails}>
+                <div className={styles.techDetail}>ID: AK-97</div>
+                <div className={styles.techDetail}>SYS: ONLINE</div>
+              </div>
+            )}
             <div className={styles.headerActions}>
               <a 
                 href="/Arun_Kumar.pdf" 
@@ -232,7 +236,10 @@ const Header = () => {
               <ThemeToggle />
             </div>
           </div>
-          <h2 className={styles.subtitle}>Software Engineer</h2>
+          <h2 className={styles.subtitle} data-text="Software Engineer">Software Engineer</h2>
+          {cyberpunkMode && (
+            <div className={styles.scanline}></div>
+          )}
           <div className={styles.socialIcons}>
             <a 
               href="mailto:chaudharyarun5797@gmail.com" 

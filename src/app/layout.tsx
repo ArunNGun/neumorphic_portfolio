@@ -1,10 +1,10 @@
-import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "../context/ThemeContext";
 import { StarRainProvider } from "../context/StarRainContext";
 import { CyberpunkProvider } from "../context/CyberpunkContext";
-import CyberpunkToggle from "../components/CyberpunkToggle";
+import CyberpunkWrapper from "../components/CyberpunkWrapper";
 import "./globals.css";
+import "./metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,43 +15,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
-}
-
-export const metadata: Metadata = {
-  title: "Arun Kumar | Software Engineer",
-  description: "A software engineer building websites that you'd like to use.",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
-  openGraph: {
-    title: "Arun Kumar's Portfolio",
-    description: "A software engineer building websites that you'd like to use.",
-    url: "https://ar-k.vercel.app/",
-    images: [
-      {
-        url: "https://imgur.com/a/ajOoM7e.png",
-        width: 1200,
-        height: 630,
-        alt: "Arun Kumar's Portfolio",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Arun Kumar's Portfolio",
-    description: "A software engineer building websites that you'd like to use.",
-    images: ["https://imgur.com/a/ajOoM7e.png"],
-  },
-};
 
 export default function RootLayout({
   children,
@@ -110,8 +73,9 @@ export default function RootLayout({
         <StarRainProvider>
           <ThemeProvider>
             <CyberpunkProvider>
-              {children}
-              <CyberpunkToggle />
+              <CyberpunkWrapper>
+                {children}
+              </CyberpunkWrapper>
             </CyberpunkProvider>
           </ThemeProvider>
         </StarRainProvider>

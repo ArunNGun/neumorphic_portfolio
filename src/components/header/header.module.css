@@ -181,7 +181,182 @@
 :global(:root[data-cyberpunk="true"]) .flickerLetter {
   animation: flicker 3s infinite alternate;
   text-shadow: 1px 2px 2px #00ffe8;
+  position: relative;
 }
+
 :global(:root[data-cyberpunk="true"]) .title {
-  text-shadow: 1px 2px 2px #00ffe8;
+  font-family: 'Space Armor', 'Rovelink', monospace;
+  color: var(--cyber-yellow);
+  text-shadow: 
+    0 0 5px var(--cyber-blue),
+    0 0 10px var(--cyber-pink);
+  position: relative;
+  letter-spacing: 2px;
+}
+
+:global(:root[data-cyberpunk="true"]) .title::before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  text-shadow: 2px 0 var(--cyber-pink);
+  top: 0;
+  color: var(--cyber-pink);
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: cyber-noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+:global(:root[data-cyberpunk="true"]) .socialIcon {
+  color: var(--cyber-blue);
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+:global(:root[data-cyberpunk="true"]) .socialIcon::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.3s ease;
+}
+
+:global(:root[data-cyberpunk="true"]) .socialIcon:hover {
+  color: var(--cyber-pink);
+  transform: translateY(-3px);
+  text-shadow: 0 0 8px var(--cyber-pink);
+}
+
+:global(:root[data-cyberpunk="true"]) .socialIcon:hover::before {
+  top: 100%;
+}
+
+:global(:root[data-cyberpunk="true"]) .socialIcons {
+  position: relative;
+  padding: 10px;
+  border: 1px solid var(--cyber-blue);
+  background-color: rgba(10, 10, 30, 0.3);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  clip-path: polygon(
+    0 10px, 
+    10px 0, 
+    calc(100% - 10px) 0, 
+    100% 10px, 
+    100% calc(100% - 10px), 
+    calc(100% - 10px) 100%, 
+    10px 100%, 
+    0 calc(100% - 10px)
+  );
+}
+
+:global(:root[data-cyberpunk="true"]) .subtitle {
+  font-family: 'Rovelink', sans-serif;
+  letter-spacing: 2px;
+  color: var(--cyber-blue);
+  text-shadow: 0 0 5px var(--cyber-blue);
+  position: relative;
+  margin: 10px 0;
+}
+
+/* Cyberpunk decorative elements */
+:global(:root[data-cyberpunk="true"]) .main {
+  position: relative;
+}
+
+:global(:root[data-cyberpunk="true"]) .main::before,
+:global(:root[data-cyberpunk="true"]) .main::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-style: solid;
+  border-color: var(--cyber-blue);
+  pointer-events: none;
+}
+
+:global(:root[data-cyberpunk="true"]) .main::before {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+  box-shadow: -5px -5px 10px rgba(0, 255, 255, 0.3);
+}
+
+:global(:root[data-cyberpunk="true"]) .main::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
+  box-shadow: 5px 5px 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Tech details */
+.techDetails {
+  display: none;
+}
+
+:global(:root[data-cyberpunk="true"]) .techDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: var(--cyber-blue);
+}
+
+:global(:root[data-cyberpunk="true"]) .techDetail {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px 6px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 5px) 0, 
+    100% 5px, 
+    100% 100%, 
+    5px 100%, 
+    0 calc(100% - 5px)
+  );
+}
+
+/* Scanline effect */
+.scanline {
+  display: none;
+}
+
+:global(:root[data-cyberpunk="true"]) .scanline {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.2;
+  animation: scanlineMove 10s linear infinite;
+}
+
+@keyframes scanlineMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
 }

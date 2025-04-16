@@ -1,0 +1,413 @@
+.loadingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0a0a1e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.fadeOut {
+  opacity: 0;
+}
+
+.cyberGrid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  z-index: 0;
+  will-change: opacity;
+}
+
+.gridCell {
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
+  animation: gridPulse 8s infinite alternate;
+  will-change: opacity, border-color;
+}
+
+@keyframes gridPulse {
+  0%, 100% {
+    opacity: 0.2;
+    border-color: rgba(0, 255, 255, 0.1);
+  }
+  50% {
+    opacity: 0.5;
+    border-color: rgba(255, 0, 255, 0.2);
+  }
+}
+
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  animation: scanlineMove 10s linear infinite;
+  will-change: background-position;
+}
+
+@keyframes scanlineMove {
+  from { background-position: 0 0; }
+  to { background-position: 0 100%; }
+}
+
+.cyberContent {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  width: 90%;
+  padding: 2rem;
+  border: 1px solid #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 0 20px rgba(0, 255, 255, 0.2);
+  background-color: rgba(10, 10, 20, 0.8);
+  backdrop-filter: blur(5px);
+  animation: contentEnter 1s ease-out;
+  clip-path: polygon(
+    0 10px, 
+    10px 0, 
+    calc(100% - 10px) 0, 
+    100% 10px, 
+    100% calc(100% - 10px), 
+    calc(100% - 10px) 100%, 
+    10px 100%, 
+    0 calc(100% - 10px)
+  );
+  will-change: transform, opacity;
+}
+
+@keyframes contentEnter {
+  from {
+    transform: scale(0.9) translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.glitchTitle {
+  font-family: 'Space Armor', 'Rovelink', monospace;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #fcee0a;
+  text-shadow: 0 0 5px #fcee0a;
+  position: relative;
+  animation: glitchText 3s infinite;
+  will-change: opacity;
+}
+
+.glitchTitle span {
+  position: relative;
+  display: inline-block;
+}
+
+.glitchTitle span::before,
+.glitchTitle span::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitchTitle span::before {
+  color: #ff00ff;
+  z-index: -1;
+  animation: glitchOffset1 3s infinite alternate-reverse;
+  will-change: transform;
+}
+
+.glitchTitle span::after {
+  color: #00ffff;
+  z-index: -2;
+  animation: glitchOffset2 2s infinite alternate-reverse;
+  will-change: transform;
+}
+
+@keyframes glitchText {
+  0%, 76%, 100% { opacity: 1; }
+  77%, 79% { opacity: 0.7; }
+  78% { opacity: 1; }
+  80%, 82% { opacity: 0.5; }
+  81% { opacity: 0.8; }
+}
+
+@keyframes glitchOffset1 {
+  0%, 100% { transform: translate(0); }
+  20%, 80% { transform: translate(-1px, 1px); }
+  40%, 60% { transform: translate(1px, -1px); }
+}
+
+@keyframes glitchOffset2 {
+  0%, 100% { transform: translate(0); }
+  25%, 75% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 1px); }
+}
+
+.cyberTerminal {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid #00ffff;
+  box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.3);
+  margin-bottom: 2rem;
+  position: relative;
+  clip-path: polygon(
+    0 5px, 
+    5px 0, 
+    calc(100% - 5px) 0, 
+    100% 5px, 
+    100% calc(100% - 5px), 
+    calc(100% - 5px) 100%, 
+    5px 100%, 
+    0 calc(100% - 5px)
+  );
+}
+
+.terminalHeader {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #00ffff;
+}
+
+.terminalButton {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.red {
+  background-color: #ff5f56;
+}
+
+.yellow {
+  background-color: #ffbd2e;
+}
+
+.green {
+  background-color: #27c93f;
+}
+
+.terminalTitle {
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  color: #00ffff;
+  font-family: 'Courier New', monospace;
+}
+
+.terminalBody {
+  padding: 1rem;
+  min-height: 150px;
+  font-family: 'Courier New', monospace;
+  color: #00ffff;
+  line-height: 1.5;
+  overflow-y: auto;
+  max-height: 200px;
+  white-space: pre-wrap;
+}
+
+.terminalCursor {
+  opacity: 0;
+  color: #00ffff;
+}
+
+.terminalCursor.visible {
+  opacity: 1;
+}
+
+.progressContainer {
+  margin-top: 1.5rem;
+}
+
+.progressLabel {
+  font-family: 'Courier New', monospace;
+  color: #fcee0a;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.progressBar {
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #00ffff;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 5px) 0, 
+    100% 5px, 
+    100% 100%, 
+    5px 100%, 
+    0 calc(100% - 5px)
+  );
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+  transition: width 0.1s linear;
+  position: relative;
+  will-change: width;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  animation: progressGlow 2s linear infinite;
+  will-change: transform;
+}
+
+@keyframes progressGlow {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+.cyberCorner {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-style: solid;
+  border-color: #00ffff;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.topLeft {
+  top: 20px;
+  left: 20px;
+  border-width: 3px 0 0 3px;
+  box-shadow: -5px -5px 10px rgba(0, 255, 255, 0.3);
+}
+
+.topRight {
+  top: 20px;
+  right: 20px;
+  border-width: 3px 3px 0 0;
+  box-shadow: 5px -5px 10px rgba(0, 255, 255, 0.3);
+}
+
+.bottomLeft {
+  bottom: 20px;
+  left: 20px;
+  border-width: 0 0 3px 3px;
+  box-shadow: -5px 5px 10px rgba(0, 255, 255, 0.3);
+}
+
+.bottomRight {
+  bottom: 20px;
+  right: 20px;
+  border-width: 0 3px 3px 0;
+  box-shadow: 5px 5px 10px rgba(0, 255, 255, 0.3);
+}
+
+.techDetails {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 20px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  color: #00ffff;
+  z-index: 3;
+}
+
+.techDetail {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 3px 8px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  clip-path: polygon(
+    0 0, 
+    calc(100% - 5px) 0, 
+    100% 5px, 
+    100% 100%, 
+    5px 100%, 
+    0 calc(100% - 5px)
+  );
+}
+
+@media (max-width: 768px) {
+  .glitchTitle {
+    font-size: 1.8rem;
+  }
+  
+  .cyberContent {
+    padding: 1.5rem;
+  }
+  
+  .terminalBody {
+    min-height: 120px;
+  }
+  
+  .cyberCorner {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .techDetails {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glitchTitle {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cyberContent {
+    padding: 1rem;
+  }
+  
+  .terminalBody {
+    min-height: 100px;
+    padding: 0.8rem;
+  }
+  
+  .cyberCorner {
+    width: 20px;
+    height: 20px;
+  }
+}
