@@ -3,6 +3,7 @@ import React from 'react';
 import { useCyberpunk } from '../../context/CyberpunkContext';
 // import CyberpunkLoadingScreen from '../CyberpunkLoadingScreen';
 import CyberpunkToggle from '../CyberpunkToggle';
+import CyberpunkMusicPlayer from '../CyberpunkMusicPlayer';
 import CyberDust from '../CyberDust';
 import CyberpunkTransitionVideo from '../CyberpunkTransitionVideo';
 
@@ -22,6 +23,7 @@ const CyberpunkWrapper: React.FC<CyberpunkWrapperProps> = ({ children }) => {
         />
       )}
       {children}
+      <CyberpunkMusicPlayer />
       <CyberpunkToggle />
       <CyberDust />
     </>

@@ -5,7 +5,9 @@ interface CyberpunkContextType {
   cyberpunkMode: boolean;
   isLoading: boolean;
   isTransitioning: boolean;
+  isMusicPlaying: boolean;
   toggleCyberpunkMode: () => void;
+  toggleMusic: () => void;
   handleLoadingComplete: () => void;
   handleTransitionComplete: () => void;
 }
@@ -16,6 +18,7 @@ export const CyberpunkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [cyberpunkMode, setCyberpunkMode] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState<boolean>(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -52,6 +55,19 @@ export const CyberpunkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setIsTransitioning(false);
   };
 
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isMusicPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play().catch(error => {
+          console.error('Audio playback failed:', error);
+        });
+      }
+      setIsMusicPlaying(!isMusicPlaying);
+    }
+  };
+
   const toggleCyberpunkMode = () => {
     const newMode = !cyberpunkMode;
     
@@ -64,6 +80,7 @@ export const CyberpunkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         audioRef.current.play().catch(error => {
           console.error('Audio playback failed:', error);
         });
+        setIsMusicPlaying(true);
       }
       
       setIsTransitioning(true);
@@ -74,6 +91,7 @@ export const CyberpunkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
+        setIsMusicPlaying(false);
       }
     }
   };
@@ -83,7 +101,9 @@ export const CyberpunkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       cyberpunkMode, 
       isLoading, 
       isTransitioning,
+      isMusicPlaying,
       toggleCyberpunkMode, 
+      toggleMusic,
       handleLoadingComplete,
       handleTransitionComplete 
     }}>
