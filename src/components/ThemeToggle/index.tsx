@@ -1,11 +1,13 @@
 'use client'
 import React, { useEffect, useRef } from 'react';
 import { useTheme } from '../../context/ThemeContext';
+import { useCyberpunk } from '../../context/CyberpunkContext';
 import styles from './themeToggle.module.css';
 import { animate, createTimeline, utils } from 'animejs';
 
 const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const { cyberpunkMode } = useCyberpunk();
   const faceRef = useRef<HTMLDivElement>(null);
   const switchBgRef = useRef<HTMLDivElement>(null);
   const eyeLeftRef = useRef<SVGPathElement>(null);
@@ -165,6 +167,9 @@ const ThemeToggle: React.FC = () => {
     
     toggleTheme();
   };
+
+  // Hide the theme toggle when in cyberpunk mode
+  if (cyberpunkMode) return null;
 
   return (
     <div className={styles.container}>
