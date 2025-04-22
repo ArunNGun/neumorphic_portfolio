@@ -90,7 +90,7 @@
   z-index: -1;
   animation: glitchOffset1 5s infinite alternate-reverse;
   text-shadow: 0 0 5px var(--cyber-pink);
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 .glitchText::after {
@@ -98,7 +98,7 @@
   z-index: -2;
   animation: glitchOffset2 5s infinite alternate-reverse;
   text-shadow: 0 0 5px var(--cyber-blue);
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 @keyframes glitchAnim {
@@ -147,7 +147,7 @@
   max-width: calc(100% - 4rem);
   transition: grid-template-columns var(--speed) var(--easing),
               grid-template-rows var(--speed) var(--easing);
-  will-change: grid-template-columns, grid-template-rows;
+  will-change: grid-template-columns, grid-template-rows, transform;
   position: relative;
   z-index: 1;
   transform: translateZ(0);
@@ -162,7 +162,7 @@
   border-radius: 0;
   border: 1px solid var(--cyber-blue);
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-  transition: all 0.3s var(--easing);
+  transition: box-shadow 0.3s var(--easing), transform 0.3s var(--easing);
   clip-path: polygon(
     0 15px, 
     15px 0, 
@@ -212,7 +212,7 @@
   animation: cardGlow 5s infinite;
   pointer-events: none;
   z-index: 1;
-  will-change: opacity;
+  will-change: opacity, transform;
 }
 
 @keyframes cardGlow {
@@ -248,7 +248,8 @@
   font-family: 'Space Armor', 'Rovelink', monospace;
   color: #ff00ff !important;
   opacity: 0.9;
-  transition: opacity calc(var(--speed) * 1.2) var(--easing);
+  transition: opacity calc(var(--speed) * 1.2) var(--easing), transform 0.3s var(--easing);
+  will-change: opacity, transform;
   margin: 0;
   text-shadow: 0 0 10px #ff00ff, 0 0 15px #ff00ff;
 }
@@ -258,6 +259,7 @@
   line-height: 1.25;
   opacity: 0;
   transition: opacity calc(var(--speed) * 1.2) var(--easing);
+  will-change: opacity;
   color: var(--cyber-blue);
   text-shadow: 0 0 3px var(--cyber-blue);
   margin: 0 0 0.5rem 0;
@@ -269,6 +271,7 @@
   stroke: var(--cyber-pink);
   opacity: 0.6;
   transition: opacity calc(var(--speed) * 1.2) var(--easing);
+  will-change: opacity;
 }
 
 .cardLink, .sourceLink {
@@ -277,6 +280,7 @@
   text-decoration: none;
   opacity: 0;
   transition: opacity calc(var(--speed) * 1.2) var(--easing), transform 0.3s ease;
+  will-change: opacity, transform;
   top: 1rem;
   z-index: 10;
 }
@@ -320,9 +324,10 @@
   height: 100%;
   object-fit: cover;
   filter: grayscale(1) brightness(0.5);
-  scale: 1.1;
-  transition: filter calc(var(--speed) * 1.2) var(--easing), 
-              scale calc(var(--speed) * 1.2) var(--easing);
+  transform: scale(1.1);
+  transition: filter calc(var(--speed) * 1.2) var(--easing),
+              transform calc(var(--speed) * 1.2) var(--easing);
+  will-change: filter, transform;
   mask: radial-gradient(100% 100% at 100% 0, #fff, #0000);
   z-index: 0;
 }
@@ -336,6 +341,7 @@
   left: 1.5rem;
   opacity: 0;
   transition: opacity calc(var(--speed) * 1.2) var(--easing);
+  will-change: opacity;
 }
 
 .tag {
@@ -363,7 +369,7 @@
 
 .cardItem[data-active='true'] .cardImage {
   filter: grayscale(0) brightness(0.8);
-  scale: 1;
+  transform: scale(1);
   transition-delay: calc(var(--speed) * 0.25);
 }
 

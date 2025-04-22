@@ -1,63 +1,46 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useCyberpunk } from '../../context/CyberpunkContext';
 import styles from './cyberpunkExpandingCards.module.css';
-
-interface Project {
-  id: number;
-  title: string;
-  intro: string;
-  imageSrc: string;
-  tags: string[];
-  projectLink: string;
-  source_code: string;
-}
+import CyberpunkCardItem, { Project } from './CyberpunkCardItem';
+import { debounce, generateGridTemplate, isMobileViewport } from '../../utils/performance';
 
 interface CyberpunkExpandingCardsProps {
   projects: Project[];
 }
 
+/**
+ * CyberpunkExpandingCards component displays projects in an interactive grid
+ * with expanding card functionality in cyberpunk style
+ */
 const CyberpunkExpandingCards: React.FC<CyberpunkExpandingCardsProps> = ({ projects }) => {
   const { cyberpunkMode } = useCyberpunk();
   const [activeIndex, setActiveIndex] = useState(0);
   const listRef = useRef<HTMLUListElement>(null);
   const itemsRef = useRef<(HTMLLIElement | null)[]>([]);
-
-  const debounce = <T extends (...args: unknown[]) => void>(func: T, wait: number) => {
-    let timeout: NodeJS.Timeout;
-    return function executedFunction(...args: Parameters<T>) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  };
-
-  useEffect(() => {
-    if (!cyberpunkMode) return;
+  
+  /**
+   * Updates the grid layout based on active index and viewport size
+   */
+  const updateGridLayout = useCallback((index: number) => {
+    if (!listRef.current) return;
     
-    if (itemsRef.current.length > 0) {
-      itemsRef.current[0]?.setAttribute('data-active', 'true');
-      updateGridColumns(0);
+    const mobile = isMobileViewport();
+    const template = generateGridTemplate(projects.length, index);
+    
+    if (mobile) {
+      listRef.current.style.setProperty('grid-template-rows', template);
+      listRef.current.style.setProperty('grid-template-columns', '1fr');
+    } else {
+      listRef.current.style.setProperty('grid-template-columns', template);
+      listRef.current.style.removeProperty('grid-template-rows');
     }
-    
-    resyncArticleWidth();
-    
-    const debouncedResize = debounce(() => {
-      resyncArticleWidth();
-      updateGridColumns(activeIndex);
-    }, 150);
-    
-    window.addEventListener('resize', debouncedResize, { passive: true });
-    
-    return () => {
-      window.removeEventListener('resize', debouncedResize);
-    };
-  }, [cyberpunkMode, activeIndex]);
-
-  const resyncArticleWidth = () => {
+  }, [projects.length]);
+  
+  /**
+   * Calculates and sets the maximum article width for consistent sizing
+   */
+  const resyncArticleWidth = useCallback(() => {
     if (!listRef.current) return;
     
     let maxWidth = 0;
@@ -70,43 +53,44 @@ const CyberpunkExpandingCards: React.FC<CyberpunkExpandingCardsProps> = ({ proje
     if (maxWidth > 0) {
       listRef.current.style.setProperty('--article-width', `${maxWidth}`);
     }
-  };
-
-  const updateGridColumns = (index: number) => {
-    if (!listRef.current) return;
-    
-    const isMobile = window.innerWidth <= 480;
-    
-    const template = new Array(projects.length)
-      .fill('')
-      .map((_, i) => (i === index ? '10fr' : '1fr'))
-      .join(' ');
-    
-    if (isMobile) {
-      listRef.current.style.setProperty('grid-template-rows', template);
-      listRef.current.style.setProperty('grid-template-columns', '1fr');
-    } else {
-      listRef.current.style.setProperty('grid-template-columns', template);
-      listRef.current.style.removeProperty('grid-template-rows');
-    }
-  };
-
-  const handleItemInteraction = (index: number) => {
+  }, []);
+  
+  /**
+   * Handles user interaction with a card (click, hover, focus)
+   */
+  const handleItemInteraction = useCallback((index: number) => {
     if (!cyberpunkMode) return;
     
     setActiveIndex(index);
+    updateGridLayout(index);
+  }, [cyberpunkMode, updateGridLayout]);
+  
+  // Initialize and handle resize events
+  useEffect(() => {
+    if (!cyberpunkMode) return;
     
-    itemsRef.current.forEach((item, i) => {
-      if (item) {
-        item.setAttribute('data-active', (i === index).toString());
-      }
-    });
+    // Set initial active card
+    if (itemsRef.current.length > 0) {
+      updateGridLayout(0);
+    }
     
-    updateGridColumns(index);
-  };
-
+    resyncArticleWidth();
+    
+    // Create debounced resize handler
+    const debouncedResize = debounce(() => {
+      resyncArticleWidth();
+      updateGridLayout(activeIndex);
+    }, 150);
+    
+    window.addEventListener('resize', debouncedResize, { passive: true });
+    
+    return () => {
+      window.removeEventListener('resize', debouncedResize);
+    };
+  }, [cyberpunkMode, activeIndex, resyncArticleWidth, updateGridLayout]);
+  
   if (!cyberpunkMode) return null;
-
+  
   return (
     <div className={styles.container}>
       <h1 className={`${styles.fluid} ${styles.title}`}>
@@ -122,38 +106,17 @@ const CyberpunkExpandingCards: React.FC<CyberpunkExpandingCardsProps> = ({ proje
         style={{ '--items': projects.length, '--ideal': '300px' } as React.CSSProperties}
       >
         {projects.map((project, index) => (
-          <li 
+          <CyberpunkCardItem
             key={project.id}
             ref={el => {
               itemsRef.current[index] = el;
               return undefined;
             }}
-            data-active={index === activeIndex ? 'true' : 'false'}
-            onClick={() => handleItemInteraction(index)}
-            onPointerMove={() => handleItemInteraction(index)}
-            onFocus={() => handleItemInteraction(index)}
-            className={styles.cardItem}
-          >
-            <article>
-              <h3>{project.title}</h3>
-              <p>{project.intro}</p>
-              <a href={project.projectLink} target="_blank" rel="noopener noreferrer" className={styles.cardLink}>
-                <span>ACCESS</span>
-              </a>
-              
-              <a href={project.source_code} target="_blank" rel="noopener noreferrer" className={styles.sourceLink}>
-                <span>SOURCE</span>
-              </a>
-              
-              <img src={project.imageSrc} alt={project.title} className={styles.cardImage} />
-              
-              {/* <div className={styles.tagContainer}>
-                {project.tags.map((tag, i) => (
-                  <span key={i} className={styles.tag}>{tag}</span>
-                ))}
-              </div> */}
-            </article>
-          </li>
+            project={project}
+            isActive={index === activeIndex}
+            index={index}
+            onInteraction={handleItemInteraction}
+          />
         ))}
       </ul>
       
