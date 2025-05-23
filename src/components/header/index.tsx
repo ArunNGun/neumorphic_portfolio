@@ -54,9 +54,9 @@ const Header = () => {
               </div>
             )}
             <div className={styles.headerActions}>
-              <a 
-                href="/Arun_kumar.pdf" 
-                download 
+              <a
+                href="/api/download-resume"
+                download
                 className={`${downloadStyles.downloadLink} ${cyberpunkMode ? downloadStyles.cyberpunkDownload : ''}`}
                 onClick={handleDownloadClick}
                 style={{ pointerEvents: 'auto', position: 'relative', zIndex: 10 }}
