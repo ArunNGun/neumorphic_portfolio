@@ -10,10 +10,10 @@ export async function GET() {
     
     if (process.env.NODE_ENV === 'production') {
       // In Vercel production, public files are served from the root
-      filePath = path.join(process.cwd(), 'public', 'Arun_kumar.pdf');
+      filePath = path.join(process.cwd(), 'public', 'Arun_Kumar.pdf');
     } else {
       // In development
-      filePath = path.join(process.cwd(), 'public', 'Arun_kumar.pdf');
+      filePath = path.join(process.cwd(), 'public', 'Arun_Kumar.pdf');
     }
     
     // Check if file exists
