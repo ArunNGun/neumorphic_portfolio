@@ -1,9 +1,9 @@
 'use client'
-import React from 'react';
-import WelcomeOverlay from '../WelcomeOverlay';
+// import React from 'react';
+// import WelcomeOverlay from '../WelcomeOverlay';
 
 const WelcomeOverlayWrapper = () => {
-  return <WelcomeOverlay />;
+  return null;
 };
 
 export default WelcomeOverlayWrapper;
