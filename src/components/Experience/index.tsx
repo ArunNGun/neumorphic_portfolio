@@ -8,17 +8,17 @@ const exp = [
     company: "TELUS Digital",
     year: `May 2024 - Present (${formatDuration(new Date('2024-05-01'))})`,
     description: [
-      "Leading development teams in designing and implementing <strong>digital solutions</strong>",
-      "Implemented <strong>GCP Pub/Sub</strong> to handle <strong>real-time event processing</strong> and <strong>async microservice communication</strong>.",
-      "Hands-on experience with <strong>gRPC</strong>, transitioned existing REST services to gRPC for better <strong>performance</strong> and <strong>scalability</strong>",
-      "Mentoring junior developers and conducting <strong>code reviews</strong>",
-      "Designed and managed <strong>GCP infrastructure</strong>, including <strong>Kubernetes clusters</strong>, ensuring seamless deployment and scaling of applications.",
-      "Handled <strong>GCP API Marketplace</strong> registration and integration for <strong>enterprise-level APIs</strong>.",
-      "Automated <strong>deployment pipelines</strong> and managed secrets securely using <strong>GCP Secret Manager</strong>.",
-      "Monitored and debugged <strong>Kubernetes pods</strong> to ensure high availability and performance of applications.",
+      "Led a squad of <strong>6 engineers</strong>, owning full delivery of <strong>10+ micro-frontends end-to-end</strong> — from infra setup, CI/CD pipelines, and MFE + BFF architecture through requirement refinement and production rollout.",
+      "Designed and built <strong>BFF services</strong> integrating <strong>gRPC APIs and third-party vendors</strong> for real-time enterprise applications, enabling seamless data orchestration across distributed micro-frontends.",
+      "Built internal <strong>AI workflows</strong> including a <strong>PR review automation tool</strong>, <strong>RAG pipelines</strong>, and <strong>n8n-powered automation flows</strong> to accelerate development productivity across the organisation.",
+      "Implemented <strong>GCP Pub/Sub</strong> for real-time event processing and asynchronous microservice communication, enabling <strong>event-driven architecture</strong> at scale.",
+      "Designed a <strong>Micro-frontend starter kit</strong> adopted across multiple product teams, reducing application complexity and enabling faster independent deployments.",
+      "Traveled onsite to <strong>Canada</strong> to collaborate directly with product owners, improving requirement clarity and eliminating blockers across cross-functional teams.",
+      "Conducted <strong>20+ technical engineering interviews</strong> bi-weekly, evaluating candidates on system design, JavaScript, and React.",
+      "Managed <strong>GCP Secret Manager</strong> and <strong>GCP API Marketplace</strong> for enterprise-grade API governance and secrets management across multiple services.",
     ],
     techStack: [
-      "Next.js", "Node.js", "TypeScript", "GraphQL", "Microservices", "GCP", "Kubernetes", 
+      "Next.js", "Node.js", "TypeScript", "GraphQL", "gRPC", "Microservices", "GCP", "Kubernetes", "RAG", "n8n"
     ]
   },
   {
@@ -40,7 +40,7 @@ const exp = [
     company: "TELUS Digital",
     year: `Jun 2021 - Mar 2023 (${formatDuration(new Date('2021-06-01'), new Date('2023-03-01'))})`,
     description: [
-      "Led the design and development of multiple <strong>enterprise-level microservice applications</strong>, serving <strong>30 million customers</strong> using the latest technologies of <strong>Node</strong>, <strong>GraphQL</strong>, <strong>MongoDB</strong>, <strong>PostgreSQL</strong>, <strong>GCP</strong>, and <strong>SQS</strong>.",
+      "Led the design and development of multiple <strong>enterprise-level microservice applications</strong>, serving <strong>10 million customers</strong> using the latest technologies of <strong>Node</strong>, <strong>GraphQL</strong>, <strong>MongoDB</strong>, <strong>PostgreSQL</strong>, <strong>GCP</strong>, and <strong>SQS</strong>.",
       "Implemented coding and unit test guidelines, pull-request template for various repos, resulting in a <strong>20% reduction</strong> in code defects and improved team efficiency.",
       "Led the development of <strong>10+ ReactJS common components</strong> used by multiple projects, from identifying requirements to implementation, testing, setting up <strong>Storybook</strong>, and publishing as <strong>npm packages</strong>.",
     ],

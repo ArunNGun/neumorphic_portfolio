@@ -1,118 +1,94 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import Card from '../Card';
+'use client';
+import { useEffect, useRef, useState } from 'react';
 import styles from './awards.module.css';
+import Image from 'next/image';
+import Lenis from '@studio-freight/lenis';
+import { useTransform, useScroll, motion } from 'framer-motion';
 
-// Combined data with images
-const awardsData = [
-  {
-    id: 1,
-    title: "WOW & BRAVO Award",
-    organization: "Telus International",
-    year: "2023",
-    description: "Recognized as the top performer employee of the Quarter for outstanding contributions to project delivery and team collaboration.",
-    image: '/images/1.png'
-  },
-  {
-    id: 2,
-    title: "FED ReactJs-L3 Certification",
-    organization: "Wipro",
-    year: "2021",
-    description: "Certified in FED ReactJs-L3 among only 7 others out of 384 people.",
-    image: '/images/3.png'
-  },
-  {
-    id: 3,
-    title: "InnoTech-2017 Runner-up",
-    organization: "University Level Project Expo",
-    year: "2017",
-    description: "Led a 3-person team to develop DeathDoom, a multiplayer 3rd person shooting game that earned 2nd place competing against AI and Big Data projects.",
-    image: '/images/5.png'
-  }
-];
-
-// Additional certificate images for the showcase
-const certificateImages = [
-  '/images/2.jpg',
-  '/images/4.png',
-  '/images/6.png',
-  '/images/7.png',
-  '/images/8.png',
-  '/images/9.png',
-  '/images/10.png',
-  '/images/11.png'
+const images = [
+  "1.png",
+  "2.jpg",
+  "3.png",
+  "4.png",
+  "5.png",
+  "6.png",
+  "7.png",
+  "8.png",
+  "9.png",
+  "10.png",
+  "11.png",
+  "1.png"
 ];
 
 const Awards = () => {
-  const [activeCertificate, setActiveCertificate] = useState(0);
-  const allCertificateImages = [...awardsData.map(award => award.image), ...certificateImages];
+  const gallery = useRef(null);
+  const [dimension, setDimension] = useState({ width: 0, height: 0 });
 
-  // Auto-scroll certificate showcase
+  const { scrollYProgress } = useScroll({
+    target: gallery,
+    offset: ['start end', 'end start']
+  });
+
+  const { height } = dimension;
+  const y = useTransform(scrollYProgress, [0, 1], [0, height * 0.6]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, height * 1.7]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, height * 0.3]);
+  const y4 = useTransform(scrollYProgress, [0, 1], [0, height * 0.8]);
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveCertificate((prev) => (prev + 1) % allCertificateImages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [allCertificateImages.length]);
+    const lenis = new Lenis();
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+
+    const resize = () => {
+      setDimension({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    window.addEventListener('resize', resize);
+    requestAnimationFrame(raf);
+    resize();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
+  }, []);
 
   return (
-    <Card>
-      <div style={{ padding: '20px', marginTop: '36px' }}>
-        <h2 className={styles.mainTitle}>Awards & Recognition</h2>
-        
-        <div className={styles.splitLayout}>
-          {/* Awards List on Left */}
-          <div className={styles.awardsContainer}>
-            {awardsData.map((award) => (
-              <Card invert key={award.id}>
-                <div className={styles.awardCard}>
-                  <div className={styles.awardHeader}>
-                    <h3 className={styles.awardTitle}>{award.title}</h3>
-                    <div className={styles.awardMeta}>
-                      <span className={styles.organization}>{award.organization}</span>
-                      <span className={styles.year}>{award.year}</span>
-                    </div>
-                  </div>
-                  <p className={styles.description}>{award.description}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-          
-          {/* Certificate Showcase on Right */}
-          <div className={styles.showcaseContainer}>
-            <h3 className={styles.showcaseTitle}>Certificate Showcase</h3>
-            <div className={styles.certificateShowcase}>
-              {allCertificateImages.map((src, index) => (
-                <div 
-                  key={index}
-                  className={`${styles.certificateItem} ${index === activeCertificate ? styles.activeCertificate : ''}`}
-                >
-                  <img 
-                    src={src} 
-                    alt={`Certificate ${index + 1}`} 
-                    className={styles.certificateImage}
-                  />
-                </div>
-              ))}
-            </div>
-            
-            {/* Certificate Indicators */}
-            <div className={styles.certificateIndicators}>
-              {allCertificateImages.map((_, index) => (
-                <button 
-                  key={index} 
-                  className={`${styles.certificateIndicator} ${index === activeCertificate ? styles.activeCertificateIndicator : ''}`}
-                  onClick={() => setActiveCertificate(index)}
-                  aria-label={`View certificate ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+    <div className={styles.main}>
+      <div className={styles.spacer}></div>
+      <div ref={gallery} className={styles.gallery}>
+        <motion.h1
+          style={{ y: y3, rotateZ: -90 }}
+          className={styles.awardHeading}
+        >
+          Awards
+        </motion.h1>
+        <Column images={[images[0], images[1], images[2]]} y={y} />
+        <Column images={[images[3], images[4], images[5]]} y={y2} />
+        <Column images={[images[9], images[10], images[11]]} y={y4} />
       </div>
-    </Card>
+      <div className={styles.spacer}></div>
+    </div>
   );
-}
+};
+
+const Column = ({ images, y }: { images: string[]; y: any }) => {
+  return (
+    <motion.div className={styles.column} style={{ y }}>
+      {images.map((src, i) => (
+        <div key={i} className={styles.imageContainer}>
+          <Image
+            src={`/images/${src}`}
+            alt={`award-${i}`}
+            fill
+          />
+        </div>
+      ))}
+    </motion.div>
+  );
+};
 
 export default Awards;

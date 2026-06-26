@@ -7,6 +7,39 @@ import CyberpunkExpandingCards from '../CyberpunkExpandingCards';
 
 const projectsData = [
     {
+        "intro": "Open-source voice-activated teleprompter for Mac + Windows built with Tauri v2, Rust, and React/Vite. Features Dynamic Island notch mode, live script stats, screen-share stealth, VAD voice scroll, and automated multi-platform CI/CD. 61+ GitHub stars, active contributor community.",
+        "quickIntro": "Voice-activated teleprompter. Product of the Day & Week.",
+        "imageSrc": "https://github.com/user-attachments/assets/dc0b10f1-b21c-480d-aae6-dd7b6d850874",
+        "tags": [
+            "Tauri v2",
+            "Rust",
+            "React",
+            "Vite",
+            "CI/CD"
+        ],
+        "projectLink": "https://arunngun.github.io/openTeleprompt/",
+        "id": 0,
+        "source_code": "https://github.com/ArunNGun/openTeleprompt",
+        "title": "OpenTeleprompter"
+    },
+    {
+        "intro": "A Retrieval-Augmented Generation (RAG) pipeline built in Node.js using @xenova/transformers (all-MiniLM-L6-v2) for local embeddings, faiss-node for vector similarity search, and OpenAI for generation. Enables AI-powered semantic querying over programming concepts without sending raw data to external APIs.",
+        "quickIntro": "Node.js RAG pipeline with local embeddings + vector search.",
+        "imageSrc": "https://i.imgur.com/1Z8TYuA.png",
+        "tags": [
+            "Node.js",
+            "RAG",
+            "faiss-node",
+            "@xenova/transformers",
+            "OpenAI",
+            "Vector Search"
+        ],
+        "projectLink": "https://github.com/ArunNGun/RAG-Js-Concepts",
+        "id": -1,
+        "source_code": "https://github.com/ArunNGun/RAG-Js-Concepts",
+        "title": "RAG-Js-Concepts"
+    },
+    {
         "intro": "Heavily themed and animated Portfolio inspired by Bento grid design, multi theme, implemented using NextJS",
         "quickIntro": "Bento style portfolio",
         "imageSrc": "https://imgur.com/yZiiZHD.png",

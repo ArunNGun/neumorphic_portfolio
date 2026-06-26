@@ -17,7 +17,7 @@ const About = () => {
             <p 
               className={styles.description}
               dangerouslySetInnerHTML={{
-                __html: "Hey there 👋 I'm <strong>Arun</strong>, a <strong>Full-stack AI Engineer</strong> with over 5 years of experience building robust, scalable applications across the enterprise ecosystem. I specialize in creating impactful user experiences using the <strong>MERN stack</strong>, and I'm currently diving deep into the world of <strong>AI, microservices, and cloud-native architectures</strong> at <strong>Telus Digital</strong>."
+                __html: "Hey there 👋 I'm <strong>Arun</strong>, a <strong>Full-stack AI Engineer</strong> with over 6 years of experience building robust, scalable applications across the enterprise ecosystem. I specialize in creating impactful user experiences using the <strong>MERN stack</strong>, and I'm currently diving deep into the world of <strong>AI, microservices, and cloud-native architectures</strong> at <strong>Telus Digital</strong>."
               }}
             />
             <p 
