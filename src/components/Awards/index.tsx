@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './awards.module.css';
 import Image from 'next/image';
 import Lenis from '@studio-freight/lenis';
-import { useTransform, useScroll, motion } from 'framer-motion';
+import { useTransform, useScroll, motion, MotionValue } from 'framer-motion';
 
 const images = [
   "1.png",
@@ -75,7 +75,7 @@ const Awards = () => {
   );
 };
 
-const Column = ({ images, y }: { images: string[]; y: any }) => {
+const Column = ({ images, y }: { images: string[]; y: MotionValue<number> }) => {
   return (
     <motion.div className={styles.column} style={{ y }}>
       {images.map((src, i) => (
