@@ -23,18 +23,18 @@ const projectsData = [
         "title": "OpenTeleprompter"
     },
     {
-        "intro": "A Retrieval-Augmented Generation (RAG) pipeline built in Node.js using @xenova/transformers (all-MiniLM-L6-v2) for local embeddings, faiss-node for vector similarity search, and OpenAI for generation. Enables AI-powered semantic querying over programming concepts without sending raw data to external APIs.",
-        "quickIntro": "Node.js RAG pipeline with local embeddings + vector search.",
-        "imageSrc": "https://i.imgur.com/1Z8TYuA.png",
+        "intro": "A fully functional RAG (Retrieval-Augmented Generation) pipeline built in Node.js. Uses API-based embeddings, FAISS vector similarity search, and an LLM for generation. Features a live chat UI where you can query indexed documents and see the retrieved chunks that grounded the answer.",
+        "quickIntro": "Live RAG demo — semantic search over docs, grounded LLM answers.",
+        "imageSrc": "https://github.com/user-attachments/assets/205591a4-2392-48ac-a446-59cfa8b2bf06",
         "tags": [
             "Node.js",
             "RAG",
             "faiss-node",
-            "@xenova/transformers",
-            "OpenAI",
-            "Vector Search"
+            "Vector Search",
+            "Express",
+            "GenAI"
         ],
-        "projectLink": "https://github.com/ArunNGun/RAG-Js-Concepts",
+        "projectLink": "https://rag-js-concepts.onrender.com/",
         "id": -1,
         "source_code": "https://github.com/ArunNGun/RAG-Js-Concepts",
         "title": "RAG-Js-Concepts"
